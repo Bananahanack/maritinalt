@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <fieldset name="global" label="JGLOBAL_FIELDSET_OPTIONS">
+        <field name="spreadsheet_id_riga" type="text" value="" label="Riga SpreadsheetID"/>
+        <field name="range_riga" type="text" value="" label="Riga range"/>
+
+        <field name="spreadsheet_id_klaipeda" type="text" value="" label="Klaipeda SpreadsheetID"/>
+        <field name="range_klaipeda" type="text" value="" label="Klaipeda range"/>
+        
+        <field name="refresh_time" type="number" default="60" label="Refresh time(s)"/>
+    </fieldset>
+    <fieldset
+            name="permissions"
+            label="JCONFIG_PERMISSIONS_LABEL"
+            description="JCONFIG_PERMISSIONS_DESC"
+            >
+        <field
+                name="rules"
+                type="rules"
+                label="JCONFIG_PERMISSIONS_LABEL"
+                class="inputbox"
+                validate="rules"
+                filter="rules"
+                component="com_maritina_rates"
+                section="component"/>
+    </fieldset>
+</config>

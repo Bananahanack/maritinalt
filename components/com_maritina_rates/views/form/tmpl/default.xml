@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<metadata>
+    <layout title="COM_MARITINA_RATES_FORM"/>
+    <fields name="request">
+        <fieldset
+                name="request"
+                addfieldpath="/administrator/components/com_maritina_rates/models/fields">
+
+        </fieldset>
+    </fields>
+</metadata>
