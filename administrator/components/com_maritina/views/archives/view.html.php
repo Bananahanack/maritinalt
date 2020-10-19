@@ -70,7 +70,6 @@ class MaritinaViewArchives extends JViewLegacy
         }
 	}
 
-
 	protected function getSortFields()
 	{
 		return array(
