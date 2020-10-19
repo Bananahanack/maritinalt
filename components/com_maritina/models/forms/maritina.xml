@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<form>
+    <fieldset>
+        <field name="test" type="text" label="test field" class="span3" />
+    </fieldset>
+</form>

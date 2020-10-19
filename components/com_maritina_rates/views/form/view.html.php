@@ -39,13 +39,13 @@ class Maritina_RatesViewForm extends JViewLegacy
 		parent::display( $tpl );
 	}
 
-    protected function setDocument()
-    {
-        $document = JFactory::getDocument();
-        $document->addScript(JURI::root() . $this->script);
-        $document->addScript(
-            JURI::root() . "components/com_helloworld/views/helloworld/submitbutton.js");
-        JText::script('COM_HELLOWORLD_HELLOWORLD_ERROR_UNACCEPTABLE');
-    }
+//    protected function setDocument()
+//    {
+//        $document = JFactory::getDocument();
+//        $document->addScript(JURI::root() . $this->script);
+//        $document->addScript(
+//            JURI::root() . "components/com_helloworld/views/helloworld/submitbutton.js");
+//        JText::script('COM_HELLOWORLD_HELLOWORLD_ERROR_UNACCEPTABLE');
+//    }
 
 }

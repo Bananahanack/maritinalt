@@ -6,11 +6,6 @@ defined( '_JEXEC' ) or die; // No direct access
  */
 require_once JPATH_COMPONENT.'/helpers/maritina_rates.php';
 
-JLog::addLogger(
-    array('text_file' => 'com_maritina_rates.log.php'),
-    JLog::ALL,
-    array('com_maritina_rates')
-);
 //в этой строке создается экземпляр// контроллера по умолчанию. Этот контроллера лежит
 // в той же папке что и файл blog.php и имя файла controller.php
 $controller = JControllerLegacy::getInstance( 'maritina_rates' );

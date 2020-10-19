@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<extension type="component" version="1.6.0" method="upgrade">
+    <name>com_maritina</name>
+    <author>Bananahanack</author>
+    <authorEmail>jurichus94@gmail.com</authorEmail>
+    <authorUrl></authorUrl>
+    <copyright></copyright>
+    <license></license>
+    <version>1.0</version>
+    <description>COM_MARITINA_DESC</description>
+    <creationDate>19 October 2020</creationDate>
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>maritina.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+        <folder>controllers</folder>
+        <folder>assets</folder>
+        <folder>helpers</folder>
+    </files>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <languages folder="site">
+        <language tag="en-GB">language/en-GB/en-GB.com_maritina.ini</language>
+        <language tag="ru-RU">language/ru-RU/ru-RU.com_maritina.ini</language>
+    </languages>
+    <administration>
+        <menu>COM_MARITINA</menu>
+        <submenu>
+			<menu link="option=com_maritina&amp;view=archives" view="archives" img="class:archives" alt="Maritina/Archive">ARCHIVE_SUBMENU</menu>
+        </submenu>
+        <files folder="admin">
+            <filename>index.html</filename>
+            <filename>maritina.php</filename>
+            <filename>controller.php</filename>
+            <filename>config.xml</filename>
+            <filename>access.xml</filename>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>models</folder>
+            <folder>views</folder>
+            <folder>controllers</folder>
+            <folder>helpers</folder>
+        </files>
+        <languages folder="admin">
+            <language tag="en-GB">language/en-GB/en-GB.com_maritina.ini</language>
+            <language tag="ru-RU">language/ru-RU/ru-RU.com_maritina.ini</language>
+            <language tag="en-GB">language/en-GB/en-GB.com_maritina.sys.ini</language>
+            <language tag="ru-RU">language/ru-RU/ru-RU.com_maritina.sys.ini</language>
+        </languages>
+    </administration>
+</extension>

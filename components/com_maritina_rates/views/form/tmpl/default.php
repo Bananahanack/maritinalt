@@ -5,28 +5,28 @@ defined( '_JEXEC' ) or die; // No direct access
 <div>
     <h1></h1>
 
-    <form action="<?php echo JRoute::_( 'index.php?view=Form' ) ?>" method="post" id="get_rates_form">
-        <div>
+    <form action="<?php echo JRoute::_( 'index.php?view=Form' ) ?>" method="post" id="get_rates_form" class="ui-form">
+        <div class="form-row">
             <div ><?php echo $this->form->getLabel( 'd_port' ); ?></div>
             <div ><?php echo $this->form->getInput( 'd_port' ); ?></div>
         </div>
 
-        <div >
+        <div class="form-row">
             <div ><?php echo $this->form->getLabel( 'ft' ); ?></div>
             <div ><?php echo $this->form->getInput( 'ft' ); ?></div>
         </div>
 
-        <div >
+        <div class="form-row">
             <div ><?php echo $this->form->getLabel( 'email' ); ?></div>
             <div ><?php echo $this->form->getInput( 'email' ); ?></div>
         </div>
-        <div >
+        <div class="form-row">
             <div ><?php echo $this->form->getLabel( 'message' ); ?></div>
             <div ><?php echo $this->form->getInput( 'message' ); ?></div>
         </div>
 
         <input type="hidden" name="task" value="Form.save" />
-        <input type="submit" value="Get rates" />
+        <p><input type="submit" value="Get rates" />
 <!--        <input type="submit" id="btn" value="Get rates" />-->
         <?php echo JHtml::_( 'form.token' ); ?>
 <!--        --><?php //echo JHtml::_('jquery.framework', false);?>

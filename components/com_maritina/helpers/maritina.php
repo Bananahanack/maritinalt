@@ -7,7 +7,7 @@ defined( '_JEXEC' ) or die;
  * Component helper
  * @author Bananahanack
  */
-class Maritina_RatesSiteHelper
+class MaritinaSiteHelper
 {
 	/**
 	* @var array $menuIds  List Id depending of view component
@@ -46,8 +46,8 @@ class Maritina_RatesSiteHelper
 	{
 		$baseUrl = JUri::base();
 		$doc = JFactory::getDocument();
-		$doc->addScript( $baseUrl . 'components/com_maritina_rates/assets/scripts/form_action.js' )
-			->addStyleSheet( $baseUrl . 'components/com_maritina_rates/assets/styles/form.css' );
+		$doc->addScript( $baseUrl . 'components/com_maritina/assets/scripts/test.js' )
+			->addStyleSheet( $baseUrl . 'components/com_maritina/assets/styles/test.css' );
 		$app = JFactory::getApplication();
 		if ( empty( $title ) ) {
 			$title = $app->get( 'sitename' );

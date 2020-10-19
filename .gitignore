@@ -1,0 +1,26 @@
+# Android template
+bin/
+gen/
+out/
+release/
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+mymavenrepo.properties
+
+# Log Files
+*.log
+cookies.dat
+
+# IntelliJ
+*.iml
+.idea
+
+# File-based project format
+*.iws
+*.ipr
+/components/com_maritina_rates/gsheet/
