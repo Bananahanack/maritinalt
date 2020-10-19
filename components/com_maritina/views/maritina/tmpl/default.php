@@ -7,30 +7,33 @@ defined( '_JEXEC' ) or die; // No direct access
 
 <!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
 
-    <form action="index.php" method="post" id="formRates">
+    <form action="" method="post" id="formRates" class="ui-form">
 
-        <div>
-            <div><label for="d_port">Port: <span style="color: red;">*</span></label></div>
-            <input type="text" name="form[d_port]" id="d_port" value="" required="required" aria-required="true">
+        <div class="form-row">
+            <input type="text" name="form[d_port]" id="d_port" value="" required="required">
+            <label for="d_port">Discharge port</label>
         </div>
 
-        <div>
-            <div>
-                <select name="form[ft]" id="ft">
+        <div class="form-row">
+            <div class="dropdown">
+                <select name="form[ft]" id="ft" class="dropdown-select">
                     <option value="20ft" selected>20ft</option>
                     <option value="40ft">40ft</option>
                 </select>
             </div>
         </div>
 
-        <div>
-            <div><label for="email">E-mail: <span style="color: #ff0000;">*</span></label></div>
-            <input type="email" name="form[email]" id="email" value="" required="required" aria-required="true">
+        <div class="form-row">
+            <input type="email" name="form[email]" id="email" value="" required="required">
+            <label for="email">E-mail</label>
         </div>
 
-        <div>
-            <div></div><label for="message">Comment:</label></div>
+        <div class="form-row">
+        </div>
+
+        <div class="form-row">
             <textarea name="form[message]" id="message"></textarea>
+            <label for="message">Comment</label>
         </div>
 
 <!--        <input type="hidden" name="option" value="com_maritina">-->

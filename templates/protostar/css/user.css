@@ -1,0 +1,284 @@
+/*немного подшаманили поля*/
+/*div.field {
+  padding-bottom: 5px;
+}
+div.field label {
+  display: block;
+  float: left;
+  width: 70px;
+  height: 15px;
+}
+/*button*/
+/*a.searchButton {
+  font-weight: 350;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;*/
+  /*background: rgb(64,199,129);*/
+/*  background:#4a90e2;
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
+} 
+a.searchButton:hover { background: rgb(53, 167, 110); }
+a.searchButton:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}*/
+
+.ui-form {
+  max-width: 350px;
+  padding: 30px 30px 30px;
+  margin: 50px 40px auto;
+  background: none;
+  /*opacity: 0.7;*/
+}
+.form-row {
+  position: relative;
+  margin-bottom: 40px;
+}
+.form-row input,textarea {
+  display: block;
+  width: 100%;
+  padding: 0 10px;
+  line-height: 40px;
+  font-family: 'Roboto', sans-serif;
+  background: none;
+  border-width: 0;
+  border-bottom: 1px solid white;
+  transition: all 0.3s ease;
+  color: white;
+}
+.form-row label {
+  position: absolute;
+  left: 13px;
+  /*цвет плейсхолдера*/
+  color: white;
+  font-size: 20px;
+  font-weight: 300;
+  transform: translateY(-35px);
+  transition: all 0.3s ease;
+}
+/*когда нажимаем на форму*/
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: 0;
+  border-color: white;
+  /*летает вместе с фоном*/
+  /*border-bottom: 3px solid white;*/
+}
+.form-row input:focus + label,
+.form-row textarea:focus + label, 
+.form-row input:valid + label,
+.form-row textarea:valid + label {
+  transform: translateY(-60px);
+  margin-left: -14px;
+  font-size: 14px;
+  font-weight: 400;
+  outline: 0;
+  border-color: white;
+  color: white;
+}
+.ui-form input[type="submit"] {
+  width: 100%;
+  padding: 0;
+  line-height: 42px;
+  background: #4a90e2;
+  border-width: 0;
+  color: white;
+  font-size: 20px;
+}
+.ui-form p {
+  margin: 0;
+  padding-top: 10px;
+}
+
+/*DROPDOWN*/
+
+
+/*.container {
+  margin: 600px auto;
+  width: left;
+  text-align: center;
+}
+
+.container > .dropdown {
+  margin: 0 20px;
+  vertical-align: top;
+}*/
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 28px;
+  width: 160px;
+  background: none;
+  border: 1px solid;
+  border-color: white #f7f7f7 whitesmoke;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown:before, .dropdown:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px dashed;
+  border-color: #888888 transparent;
+  pointer-events: none;
+}
+
+.dropdown:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.dropdown:after {
+  margin-top: 7px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.dropdown-select {
+  position: relative;
+  width: 130%;
+  margin: 0;
+  padding: 6px 8px 6px 10px;
+  height: 28px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #62717a;
+  text-shadow: 0 1px white;
+  background: #f2f2f2; /* Fallback for IE 8 */
+  background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.dropdown-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #49aff2;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.dropdown-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+
+/*textarea*/
+
+/*textarea {
+  margin-top: 0;
+  margin-left: 0;
+  width: 100%;
+  height: 100px;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+  border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+  border-image: none;
+  border-radius: 6px 6px 6px 6px;
+  border-style: none solid solid none;
+  border-width: medium 1px 1px medium;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+  color: #555555;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1em;
+  line-height: 1.4em;
+  padding: 5px 8px;
+  transition: background-color 0.2s ease 0s;
+}
+
+textarea:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}*/
+
+
+
+
+
+
+
+/*radio*/
+/*:root {
+  --primary-c: #2196F3;
+  --secondary-c: #B2D7F5;
+  
+  --white: #FDFBFB;
+  
+  --text: #082943;  
+  --bg: var(--primary-c);
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 50px;
+  margin: 0;
+}
+li {
+  display: block;
+  position: relative;
+  padding: 20px 0px;
+}*/
+
+/* Radio Button
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+
+label { 
+  cursor: pointer; 
+  font-weight: 400;
+    color: white;
+}
+
+.check {
+  width: 30px; height: 30px;
+  position: absolute;
+  border-radius: 50%;
+  transition: transform .6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}*/
+
+/* Reset */
+/*input#one ~ .check { 
+  transform: translate(-50px, -25px); 
+  background: var(--secondary-c); 
+}
+input#two ~ .check { 
+  transform: translate(-50px, -83px); 
+  background: var(--primary-c);
+  box-shadow: 0 6px 12px rgba(33, 150, 243, 0.35);
+}*/
+
+/* Radio Input #1 */
+/*input#one:checked ~ .check { transform: translate(-50px, 33px); }*/
+
+/* Radio Input #2  */
+/*input#two:checked ~ .check { transform: translate(-50px, -25px); }*/
+
