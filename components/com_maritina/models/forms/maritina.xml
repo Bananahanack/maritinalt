@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <form>
     <fieldset>
-        <field name="test" type="text" label="test field" class="span3" />
+        <field name="d_port" id="d_port" type="text" label="Discharge port" class="span3" required="true"/>
+        <field name="ft" type="list" label="Container type" default="20ft" class="span3">
+            <option value="20ft">20ft</option>
+            <option value="40ft">40ft</option>
+        </field>
+        <field name="email" id="email" type="email" label="Email" class="span3" required="true"/>
+        <field name="message" id="message" type="textarea" label="Message" class="span3" required="false"/>
     </fieldset>
 </form>

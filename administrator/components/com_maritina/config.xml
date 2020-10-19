@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
 <config>
     <fieldset name="global" label="JGLOBAL_FIELDSET_OPTIONS">
-        <field name="limit" type="text" value="10" label="Количество записей"/>
+        <field name="spreadsheet_id_riga" type="text" value="" label="Riga SpreadsheetID"/>
+        <field name="range_riga" type="text" value="" label="Riga range"/>
+
+        <field name="spreadsheet_id_klaipeda" type="text" value="" label="Klaipeda SpreadsheetID"/>
+        <field name="range_klaipeda" type="text" value="" label="Klaipeda range"/>
+
+        <field name="refresh_time" type="number" default="60" label="Refresh time(s)"/>
 
     </fieldset>
     <fieldset

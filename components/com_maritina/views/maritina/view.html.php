@@ -27,10 +27,10 @@ class MaritinaViewMaritina extends JViewLegacy
 	 */
 	public function display( $tpl = null )
 	{
-		$this->item = $this->get( 'Item' );
-		$this->form = $this->get( 'Form' );
-		$this->state = $this->get( 'State' );
-		maritinaSiteHelper::setDocument( 'view title');
+//		$this->item = $this->get( 'Item' );
+//		$this->form = $this->get( 'Form' );
+//		$this->state = $this->get( 'State' );
+		maritinaSiteHelper::setDocument( '');
 		parent::display( $tpl );
 	}
 
