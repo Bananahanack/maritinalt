@@ -13,22 +13,34 @@ class MaritinaModelMaritina extends JModelLegacy{
      * Сохранение данных в базу
      * @param $data
      *
-     * @return bool
+     * @param $result
      *
+     * @throws Exception
      * @since version 1.0
      */
-    public function saveRequest( $data )
+    public function saveRequest( $data , $result )
     {
-        $ft = $data['ft'];
-
         $body = '<table class="table table-bordered table-striped table-hover">';
         $body .= '<tr><td>Порт:</td><td>' . $data['d_port'] . '</td></tr>';
-        $body .= '<tr><td>Container type:</td><td>' . $ft . '</td></tr>';
+        $body .= '<tr><td>Container type:</td><td>' . $data['ft'] . '</td></tr>';
         $body .= '<tr><td>E-mail:</td><td>' . $data['email'] . '</td></tr>';
-//        $body .= '<tr><td>Rate Riga:</td><td>' . $result['rate_riga']  . '</td></tr>';
-//        $body .= '<tr><td>Rate Klaipeda:</td><td>' . $result['rate_klaipeda']. '</td></tr>';
+        $body .= '<tr><td>Rate Riga:</td><td>' . $result['rate_riga']  . '</td></tr>';
+        $body .= '<tr><td>Rate Klaipeda:</td><td>' . $result['rate_klaipeda']. '</td></tr>';
         $body .= '<tr><td>Comment:</td><td>' . $data['message'] . '</td></tr>';
         $body .= '</table>';
+
+
+//        $table_refresh = $this->getTable('maritina_refresh');
+//        $archiveData1 = array(
+//          'port' => 'China',
+//          'ft20' => 20,
+//          'ft40' => 40,
+//          'time' => time()
+//        );
+//
+//        $table_refresh->bind( $archiveData1);
+//        $table_refresh->store();
+
 
         $table = $this->getTable( 'maritina_form' );
 
@@ -36,7 +48,6 @@ class MaritinaModelMaritina extends JModelLegacy{
             'title' => 'Порт: ' . $data['d_port'],
             'text' => $body
         );
-
         //Заносим данные в таблицу
         $table->bind( $archiveData );
         if ( $table->store() ) {

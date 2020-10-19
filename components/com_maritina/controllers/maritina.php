@@ -56,9 +56,9 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         */
         //получение данных из конфига
         $params = JComponentHelper::getParams( 'com_maritina' );
-        $spreadsheetId = $params->get('spreadsheet_id_riga');
+        $spreadsheetId_riga = $params->get('spreadsheet_id_riga');
         $range_riga = $params->get('range_riga');
-        $spreadsheet_id_klaipeda = $params->get('spreadsheet_id_klaipeda');
+        $spreadsheetid_klaipeda = $params->get('spreadsheet_id_klaipeda');
         $range_klaipeda = $params->get('range_klaipeda');
         $refresh_time = $params->get('refresh_time');
         $currentTime = time();
@@ -69,13 +69,12 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         $service = self::getClient();
 
         //массив всех данных из гшита
-        $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId, $range_riga, $last_update = 0);
-        $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId, $range_klaipeda, $last_update = 0);
+        $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId_riga, $range_riga, $last_update = 0);
+        $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetid_klaipeda, $range_klaipeda, $last_update = 0);
 
         //найденные ячейки
         $riga_search_result = self::searchNeeded($d_port, $ft, $riga_20ft_40ft_list);
         $klaipeda_search_result = self::searchNeeded($d_port, $ft, $klaipeda_20ft_40ft_list);
-
         $result = array(
             'd_port' => $d_port,
             'rate_riga' => $riga_search_result[$d_port],
@@ -83,14 +82,11 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         );
 
         //-------------------------------------------------------------------------
-        if ( $this->getModel()->saveRequest( $form ) ) { //дергаем в модели метод saveRequest, и если вернулось true то выполняем какие то действия и выводим сообщение
-//            echo new JResponseJson($result);
+        if ( $this->getModel()->saveRequest( $form, $result ) ) { //дергаем в модели метод saveRequest, и если вернулось true то выполняем какие то действия и выводим сообщение
             echo json_encode($result);
             exit;
 //            $this->printJson( 'Request completed!', true );
-
-//            echo json_encode($result);
-            //$this->printJson()
+//            echo new JResponseJson($result);
         }
         $this->printJson( 'Request Error!' );//если не удалось сохранить
     }
@@ -119,13 +115,16 @@ class MaritinaControllerMaritina extends JControllerLegacy{
             print "No data found.\n";
         }else{
             foreach ($values as $row) {
+                if( trim($row[0]) === '' || (trim($row[34]) === '' && trim($row[35]) === '')){
+                    continue;
+                }
                 $list[$i] = array(
                     'port' => mb_strtolower($row[0]),
-                    '20ft' => $row[18],
-                    '40ft' => $row[19]);
+                    '20ft' => $row[34],
+                    '40ft' => $row[35]);
                 $i++;
-            }
 
+            }
         }
         return $list;
     }
