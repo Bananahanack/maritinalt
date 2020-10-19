@@ -55,14 +55,8 @@ $sortFields = $this->getSortFields();
 					<th width="1%" class="hidden-phone">
 						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_( 'JGLOBAL_CHECK_ALL' ); ?>" onclick="Joomla.checkAll(this)" />
 					</th>
-					<th width="5%" style="min-width:55px" class="center">
-						<?php echo JHtml::_( 'searchtools.sort', 'JSTATUS', 'state', $listDirn, $listOrder ); ?>
-					</th>
 					<th>
 						<?php echo JHtml::_( 'searchtools.sort', 'JGLOBAL_TITLE', 'title', $listDirn, $listOrder ); ?>
-					</th>
-					<th width="10%" class="hidden-phone">
-						<?php echo JHtml::_( 'searchtools.sort', 'JAUTHOR', 'created_by', $listDirn, $listOrder ); ?>
 					</th>
 					<th width="10%" class="hidden-phone">
 						<?php echo JHtml::_( 'searchtools.sort', 'JDATE', 'created', $listDirn, $listOrder ); ?>
@@ -100,11 +94,6 @@ $sortFields = $this->getSortFields();
 						<td class="center hidden-phone">
 							<?php echo JHtml::_( 'grid.id', $i, $item->id ); ?>
 						</td>
-						<td class="center">
-							<div class="btn-group">
-								<?php echo JHtml::_( 'jgrid.published', $item->state, $i, 'archives.', $canChange, 'cb' ); ?>
-							</div>
-						</td>
 						<td class="nowrap has-context">
 							<div class="pull-left">
 								<?php if ( $canEdit || $canEditOwn ) : ?>
@@ -132,11 +121,8 @@ $sortFields = $this->getSortFields();
 							</div>
 
 						</td>
-						<td class="small hidden-phone">
-							<?php echo $this->escape( $item->created_by ); ?>
-						</td>
 						<td class="nowrap small hidden-phone">
-							<?php echo JHtml::_( 'date', $item->created, JText::_( 'DATE_FORMAT_LC4' ) ); ?>
+							<?php echo JHtml::_( 'date', $item->created, 'd.m.Y H:i' ); ?>
 						</td>
 						<td class="center hidden-phone">
 							<?php echo (int)$item->id; ?>

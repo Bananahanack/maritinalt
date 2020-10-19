@@ -19,12 +19,13 @@ div.field label {
 /*  background:#4a90e2;
   box-shadow: 0 -3px rgb(53,167,110) inset;
   transition: 0.2s;
-} 
+}
 a.searchButton:hover { background: rgb(53, 167, 110); }
 a.searchButton:active {
   background: rgb(33,147,90);
   box-shadow: 0 3px rgb(33,147,90) inset;
 }*/
+
 
 .ui-form {
   max-width: 350px;
@@ -68,7 +69,7 @@ a.searchButton:active {
   /*border-bottom: 3px solid white;*/
 }
 .form-row input:focus + label,
-.form-row textarea:focus + label, 
+.form-row textarea:focus + label,
 .form-row input:valid + label,
 .form-row textarea:valid + label {
   transform: translateY(-60px);
@@ -186,6 +187,52 @@ a.searchButton:active {
 
 
 
+/*output*/
+
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  border-radius: 10px;
+  border-spacing: 0;
+  text-align: center;
+}
+th {
+  background: none;
+  color: white;
+  text-shadow: 0 1px 1px #2D2020;
+  padding: 10px 20px;
+}
+th, td {
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  border-color: white;
+}
+th:first-child, td:first-child {
+  text-align: left;
+}
+th:first-child {
+  border-top-left-radius: 10px;
+}
+th:last-child {
+  border-top-right-radius: 10px;
+  border-right: none;
+}
+td {
+  padding: 10px 20px;
+  background: none;
+}
+tr:last-child td:first-child {
+  border-radius: 0 0 0 10px;
+}
+tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+tr td:last-child {
+  border-right: none;
+}
+
+
+
 /*textarea*/
 
 /*textarea {
@@ -227,10 +274,10 @@ textarea:focus {
 /*:root {
   --primary-c: #2196F3;
   --secondary-c: #B2D7F5;
-  
+
   --white: #FDFBFB;
-  
-  --text: #082943;  
+
+  --text: #082943;
   --bg: var(--primary-c);
 }
 
@@ -252,8 +299,8 @@ li {
   visibility: hidden;
 }
 
-label { 
-  cursor: pointer; 
+label {
+  cursor: pointer;
   font-weight: 400;
     color: white;
 }
@@ -266,12 +313,12 @@ label {
 }*/
 
 /* Reset */
-/*input#one ~ .check { 
-  transform: translate(-50px, -25px); 
-  background: var(--secondary-c); 
+/*input#one ~ .check {
+  transform: translate(-50px, -25px);
+  background: var(--secondary-c);
 }
-input#two ~ .check { 
-  transform: translate(-50px, -83px); 
+input#two ~ .check {
+  transform: translate(-50px, -83px);
   background: var(--primary-c);
   box-shadow: 0 6px 12px rgba(33, 150, 243, 0.35);
 }*/

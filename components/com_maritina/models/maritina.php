@@ -21,7 +21,7 @@ class MaritinaModelMaritina extends JModelLegacy{
     public function saveRequest( $data , $result )
     {
         $body = '<table class="table table-bordered table-striped table-hover">';
-        $body .= '<tr><td>Порт:</td><td>' . $data['d_port'] . '</td></tr>';
+        $body .= '<tr><td>Port:</td><td>' . $data['d_port'] . '</td></tr>';
         $body .= '<tr><td>Container type:</td><td>' . $data['ft'] . '</td></tr>';
         $body .= '<tr><td>E-mail:</td><td>' . $data['email'] . '</td></tr>';
         $body .= '<tr><td>Rate Riga:</td><td>' . $result['rate_riga']  . '</td></tr>';
@@ -30,7 +30,8 @@ class MaritinaModelMaritina extends JModelLegacy{
         $body .= '</table>';
 
 
-//        $table_refresh = $this->getTable('maritina_refresh');
+        $table_refresh = $this->getTable('maritina_refresh');
+        $table_refresh->getFields();
 //        $archiveData1 = array(
 //          'port' => 'China',
 //          'ft20' => 20,
@@ -45,7 +46,7 @@ class MaritinaModelMaritina extends JModelLegacy{
         $table = $this->getTable( 'maritina_form' );
 
         $archiveData = array(
-            'title' => 'Порт: ' . $data['d_port'],
+            'title' => $data['message'] ,
             'text' => $body
         );
         //Заносим данные в таблицу
@@ -55,6 +56,15 @@ class MaritinaModelMaritina extends JModelLegacy{
         }
         return false;
     }
+
+//    public function getTimeFromDb($currentTime){
+//        $table_refresh = $this->getTable('maritina_refresh');
+//        $timeFromDb = 0;
+//
+//
+//        return $timeFromDb;
+//    }
+
 }
 
 

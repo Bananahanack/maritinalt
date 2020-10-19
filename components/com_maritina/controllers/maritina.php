@@ -66,6 +66,9 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         $d_port = mb_strtolower(trim($form['d_port']));
         $ft = $form['ft'];
 
+//        $this->getModel()->getTimeFromDb($currentTime);
+
+
         $service = self::getClient();
 
         //массив всех данных из гшита
@@ -75,11 +78,15 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         //найденные ячейки
         $riga_search_result = self::searchNeeded($d_port, $ft, $riga_20ft_40ft_list);
         $klaipeda_search_result = self::searchNeeded($d_port, $ft, $klaipeda_20ft_40ft_list);
+
+        //if ( trim( $riga_search_result['d_port'] ) === '' || trim( $klaipeda_search_result['d_port'] ) === '' )
+
         $result = array(
             'd_port' => $d_port,
             'rate_riga' => $riga_search_result[$d_port],
             'rate_klaipeda' => $klaipeda_search_result[$d_port]
         );
+
 
         //-------------------------------------------------------------------------
         if ( $this->getModel()->saveRequest( $form, $result ) ) { //дергаем в модели метод saveRequest, и если вернулось true то выполняем какие то действия и выводим сообщение
@@ -136,7 +143,6 @@ class MaritinaControllerMaritina extends JControllerLegacy{
 
         $client = new Google_Client();
         $client->useApplicationDefaultCredentials();
-        // $client->addScope( 'https://www.googleapis.com/auth/spreadsheets' );
         $client->setScopes(Google_Service_Sheets::SPREADSHEETS_READONLY);
         $service = new Google_Service_Sheets( $client );
         return $service;

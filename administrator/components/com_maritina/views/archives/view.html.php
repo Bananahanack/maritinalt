@@ -39,7 +39,6 @@ class MaritinaViewArchives extends JViewLegacy
 		$this->items = $this->get( 'Items' );
 		$this->pagination = $this->get( 'Pagination' );
 		$this->state = $this->get( 'State' );
-		$this->authors = $this->get( 'Authors' );
 		$this->user = JFactory::getUser();
 		$this->filterForm    = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
@@ -60,39 +59,23 @@ class MaritinaViewArchives extends JViewLegacy
 		JToolBarHelper::title( JText::_( 'COM_MARITINA' ) );
 		$canDo = maritinaHelper::getActions( 'archive' );
 
-		if ( $canDo->get( 'core.create' ) || ( count( $this->user->getAuthorisedCategories( 'com_maritina', 'core.create' ) ) ) > 0 ) {
-			JToolBarHelper::addNew( 'archive.add' );
-		}
+        if ( $canDo->get( 'core.delete' ) ) {
+            JToolBarHelper::deleteList( 'DELETE_QUERY_STRING', 'archives.delete', 'JTOOLBAR_DELETE' );
+            JToolBarHelper::divider();
+        }
 
-		if ( ( $canDo->get( 'core.edit' ) ) || ( $canDo->get( 'core.edit.own' ) ) ) {
-			JToolBarHelper::editList( 'archive.edit' );
-		}
-
-		if ( $canDo->get( 'core.edit.state' ) ) {
-			JToolBarHelper::divider();
-			JToolBarHelper::publish( 'archives.publish', 'JTOOLBAR_PUBLISH', true );
-			JToolBarHelper::unpublish( 'archives.unpublish', 'JTOOLBAR_UNPUBLISH', true );
-			JToolBarHelper::divider();
-
-			if ( $canDo->get( 'core.delete' ) ) {
-				JToolBarHelper::deleteList( 'DELETE_QUERY_STRING', 'archives.delete', 'JTOOLBAR_DELETE' );
-				JToolBarHelper::divider();
-			}
-
-			if ( $canDo->get( 'core.admin' ) ) {
-				JToolBarHelper::preferences( 'com_maritina' );
-				JToolBarHelper::divider();
-			}
-		}		
+        if ( $canDo->get( 'core.admin' ) ) {
+            JToolBarHelper::preferences( 'com_maritina' );
+            JToolBarHelper::divider();
+        }
 	}
+
 
 	protected function getSortFields()
 	{
 		return array(
 			'ordering' => JText::_( 'JGRID_HEADING_ORDERING' ),
-			'published' => JText::_( 'JSTATUS' ),
 			'title' => JText::_( 'JGLOBAL_TITLE' ),
-			'created_by' => JText::_( 'JAUTHOR' ),
 			'created' => JText::_( 'JDATE' ),
 			'id' => JText::_( 'JGRID_HEADING_ID' )
 		);
