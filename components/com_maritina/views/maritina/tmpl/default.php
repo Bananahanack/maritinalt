@@ -12,6 +12,7 @@ defined( '_JEXEC' ) or die; // No direct access
         <div>
             <label for="d_port">Discharge port</label>
             <input type="text" name="form[d_port]" id="d_port" value="" required="required">
+
         </div>
 
         <div >
@@ -36,21 +37,48 @@ defined( '_JEXEC' ) or die; // No direct access
             <textarea name="form[message]" id="message"></textarea>
         </div>
 
-<!--        <input type="hidden" name="option" value="com_maritina">-->
-<!--		<input type="hidden" name="task" value="Maritina.save" />-->
-<!--		<input type="submit" value="Get rates" />-->
-
         <input type="hidden" name="option" value="com_maritina">
         <input type="hidden" name="task" value="maritina.send">
+
         <button type="submit" id="btn">Get Rates</button>
-
-
 
         <?php echo JHtml::_( 'form.token' ); ?>
 	</form>
     <div id="get_rates_form_result"></div>
+
 </div>
 <script>
+
+    // jQuery(document).ready(function($) {
+    //     $('#d_port').autocomplete({
+    //         source: function () {
+    //             var form = $(this);
+    //             // организуем кроссдоменный запрос
+    //             $.ajax({
+    //                 // type: 'POST',
+    //                 // cache: false,
+    //                 dataType: 'json',
+    //                 url: 'index.php?format=raw&option=com_maritina&task=autoComplete',
+    //                 url: form.attr('action'),
+    //                 data:form.serializeArray(),
+    //                 // параметры запроса, передаваемые на сервер (последний - подстрока для поиска):
+    //                 // data: {
+    //                 //     name_startsWith: request.term
+    //                 // },
+    //                 // обработка успешного выполнения запроса
+    //                 success: function (response) {
+    //                     // приведем полученные данные к необходимому формату и передадим в предоставленную функцию response
+    //
+    //                     alert(response.message);
+    //                     form.find('button[type="submit"]').show();
+    //                     }
+    //             });
+    //         },
+    //         // minLength: 2
+    //     });
+    // });
+//refresh button //
+
     jQuery(document).ready(function ($) {
         $('#formRates').submit(function (e) {
             e.preventDefault();
@@ -65,7 +93,6 @@ defined( '_JEXEC' ) or die; // No direct access
                 success: function (response) {
                     // if (response.result) {
                         //выполняем какие до дейстивя если нужно при успешной отправке формы
-
                     // }
                     $('#get_rates_form_result').html(
                         '<table>' +
@@ -86,61 +113,20 @@ defined( '_JEXEC' ) or die; // No direct access
                             ' </tr>' +
                         '</table>'
                     );
-
-                    // $('#get_rates_form_result').html(
-                    //     '<br><br>'+
-                    //     'Port: '+response.d_port
-                    //     +'<br>Rate from Riga: '+response.rate_riga
-                    //     +'<br>Rate from Klaipeda: '+response.rate_klaipeda
-                    // );
-
-                    // alert(response.d_port);
-                    // form.find('button[type="submit"]').show();
                 }
             });
         });
     });
 </script>
 
-<!--<div class="item-page">-->
-<!--    <h1></h1>-->
-<!---->
-<!---->
-<!--    <form action="" method="post" id="formRates" class="ui-form">-->
-<!---->
-<!--        <div class="form-row">-->
-<!--            <input type="text" name="form[d_port]" id="d_port" value="" required="required">-->
-<!--            <label for="d_port">Discharge port</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-row">-->
-<!--            <div class="dropdown">-->
-<!--                <select name="form[ft]" id="ft" class="dropdown-select">-->
-<!--                    <option value="20ft" selected>20ft</option>-->
-<!--                    <option value="40ft">40ft</option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-row">-->
-<!--            <input type="email" name="form[email]" id="email" value="" required="required">-->
-<!--            <label for="email">E-mail</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-row">-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-row">-->
-<!--            <textarea name="form[message]" id="message"></textarea>-->
-<!--            <label for="message">Comment</label>-->
-<!--        </div>-->
-<!---->
-<!---->
-<!--        <input type="hidden" name="option" value="com_maritina">-->
-<!--        <input type="hidden" name="task" value="maritina.send">-->
-<!--        <button type="submit">Get Rates</button>-->
-<!---->
-<!--        <div id="get_rates_form_result"></div>-->
-<!---->
-<!--    </form>-->
-<!--</div>-->
+
+<!--    jQuery(document).ready(function() {
+
+        var flowers = ["Астра", "Нарцисс", "Роза", "Пион", "Примула",
+            "Подснежник", "Мак", "Первоцвет", "Петуния", "Фиалка"];
+
+        $('#d_port').autocomplete({
+            source: flowers
+        })
+    });
+    -->

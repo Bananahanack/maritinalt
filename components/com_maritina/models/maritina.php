@@ -29,25 +29,43 @@ class MaritinaModelMaritina extends JModelLegacy{
         $body .= '<tr><td>Comment:</td><td>' . $data['message'] . '</td></tr>';
         $body .= '</table>';
 
-
-        $table_refresh = $this->getTable('maritina_refresh');
-        $table_refresh->getFields();
-//        $archiveData1 = array(
-//          'port' => 'China',
-//          'ft20' => 20,
-//          'ft40' => 40,
-//          'time' => time()
-//        );
-//
-//        $table_refresh->bind( $archiveData1);
-//        $table_refresh->store();
-
-
         $table = $this->getTable( 'maritina_form' );
+        $archiveData = array(
+            'title' => $data['email'] ,
+            'text' => $body
+        );
+
+        //Заносим данные в таблицу
+        $table->bind( $archiveData );
+        if ( $table->store() ) {
+            return true;
+        }
+        return false;
+    }
+
+    //подтягиваем данные из БД
+    public function getDataFromDb($columnString){
+        $db = $this->getDbo();
+        return $db->setQuery( 'SELECT ' . $columnString . ' FROM m2gfc_maritina_refresh')->loadResult();
+    }
+
+    //truncate table
+    public function truncateDb(){
+        $db = $this->getDbo();
+        if($db->setQuery( 'TRUNCATE TABLE m2gfc_maritina_refresh')->execute()){
+            return true;
+        }
+        return false;
+    }
+
+    //сохраняем данные, чтобы потом достать при запросе
+    public function saveData( $currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list){
+        $table = $this->getTable('maritina_refresh');
 
         $archiveData = array(
-            'title' => $data['message'] ,
-            'text' => $body
+            'time' => $currentTime,
+            'riga_data_list' => json_encode($riga_20ft_40ft_list),
+            'klaipeda_data_list' => json_encode($klaipeda_20ft_40ft_list)
         );
         //Заносим данные в таблицу
         $table->bind( $archiveData );
@@ -57,69 +75,13 @@ class MaritinaModelMaritina extends JModelLegacy{
         return false;
     }
 
-//    public function getTimeFromDb($currentTime){
-//        $table_refresh = $this->getTable('maritina_refresh');
-//        $timeFromDb = 0;
-//
-//
-//        return $timeFromDb;
-//    }
+    public function getDports(){
+
+    }
+
+
+
+
+
 
 }
-
-
-
-
-//class MaritinaModelMaritina extends JModelAdmin
-//{
-//	/**
-//	 * Method of loading the current form
-//	 * @param Array $data
-//	 * @param Boolean $loadData
-//	 * @return Object form data
-//	 */
-//	public function getForm( $data = array(), $loadData = true )
-//	{
-//		$form = $this->loadForm( '', 'maritina', array( 'control' => 'jform', 'load_data' => $loadData ) );
-//		if ( empty( $form ) ) {
-//			return false;
-//		}
-//		return $form;
-//	}
-//
-//	/**
-//	 * Method of loading table for current item
-//	 * @param Sting $type (name table)
-//	 * @param String $prefix (prefix table)
-//	 * @param Array $config
-//	 * @return Tablemaritina_form
-//	 */
-//	public function getTable( $type = 'maritina_form', $prefix = 'Table', $config = array() )
-//	{
-//		return JTable::getInstance( $type, $prefix, $config );
-//	}
-//
-//	/**
-//	 * Method of loading data to form
-//	 * @return Object
-//	 */
-//	protected function loadFormData()
-//	{
-//		$data = JFactory::getApplication()->getUserState( 'com_maritina.edit.maritina.data', array() );
-//		if ( empty( $data ) ) {
-//			$data = $this->getItem();
-//		}
-//		return $data;
-//	}
-//
-//	/**
-//	 * save data
-//	 * @param array $data
-//	 * @return bool
-//	 */
-//	public function save( $data )
-//	{
-//		return parent::save( $data );
-//	}
-//
-//}
