@@ -35,6 +35,9 @@ class MaritinaModelMaritina extends JModelLegacy{
             'text' => $body
         );
 
+
+
+
         //Заносим данные в таблицу
         $table->bind( $archiveData );
         if ( $table->store() ) {

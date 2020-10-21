@@ -40,23 +40,6 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         echo json_encode( $jsonData );
         exit;
     }
-//    public function refresh(){
-//        $dbTime = intval($this->getModel()->getDataFromDb('time'));
-//        if($dbTime === null){
-//            $params = JComponentHelper::getParams( 'com_maritina' );
-//            $spreadsheetId_riga = $params->get('spreadsheet_id_riga');
-//            $range_riga = $params->get('range_riga');
-//            $spreadsheetid_klaipeda = $params->get('spreadsheet_id_klaipeda');
-//            $range_klaipeda = $params->get('range_klaipeda');
-//
-//            $service = self::getClient();
-//            $currentTime = time();
-//            $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId_riga, $range_riga, $last_update = 0);
-//            $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetid_klaipeda, $range_klaipeda, $last_update = 0);
-//            $this->getModel()->saveData($currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list);
-//        }
-//    }
-
 
     /**
      * Отправка данных
@@ -65,50 +48,25 @@ class MaritinaControllerMaritina extends JControllerLegacy{
     public function send(){
         if ( !JSession::checkToken() ) exit; //Проверка токена
         $form = $this->input->get( 'form', [ ], 'array' ); //получаем данные формы
-        if ( trim( $form['d_port'] ) === '' ) $this->printJson( 'Input the port name!' ); //проверка имени
+//        if ( trim( $form['d_port'] ) === '' ) $this->printJson( 'Input the port name!' ); //проверка имени
         if ( !filter_var( $form['email'], FILTER_VALIDATE_EMAIL ) ) $this->printJson( 'Invalid E-mail!' );//проверка E-mail
-        //-------------------------------------------------------------------------
-        /*
-                работа с гшит
-        */
-        //получение данных из конфига
-        $params = JComponentHelper::getParams( 'com_maritina' );
-        $spreadsheetId_riga = $params->get('spreadsheet_id_riga');
-        $range_riga = $params->get('range_riga');
-        $spreadsheetid_klaipeda = $params->get('spreadsheet_id_klaipeda');
-        $range_klaipeda = $params->get('range_klaipeda');
-        $refresh_time = $params->get('refresh_time');
-        $currentTime = time();
 
-        $d_port = mb_strtolower(trim($form['d_port']));
+        $d_port = mb_strtoupper(trim($form['d_port']));
         $ft = $form['ft'];
-        $riga_20ft_40ft_list = null;
-        $klaipeda_20ft_40ft_list = null;
 
-        $dbTime = intval($this->getModel()->getDataFromDb('time'));
-        if($dbTime === null || ($currentTime - $dbTime) > $refresh_time){
-            $service = self::getClient();
-            //массив всех данных из гшита
-            $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId_riga, $range_riga, $last_update = 0);
-            $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetid_klaipeda, $range_klaipeda, $last_update = 0);
-            $this->getModel()->truncateDb();
-            $this->getModel()->saveData($currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list);
-        }else{
-            $riga_20ft_40ft_list = json_decode($this->getModel()->getDataFromDb('riga_data_list'), true);
-            $klaipeda_20ft_40ft_list = json_decode($this->getModel()->getDataFromDb('klaipeda_data_list'), true);
-        }
+        $this->refresh();
+
+        $riga_20ft_40ft_list = json_decode($this->getModel()->getDataFromDb('riga_data_list'), true);
+        $klaipeda_20ft_40ft_list = json_decode($this->getModel()->getDataFromDb('klaipeda_data_list'), true);
         //найденные ячейки
         $riga_search_result = self::searchNeeded($d_port, $ft, $riga_20ft_40ft_list);
         $klaipeda_search_result = self::searchNeeded($d_port, $ft, $klaipeda_20ft_40ft_list);
-
-        //if ( trim( $riga_search_result['d_port'] ) === '' || trim( $klaipeda_search_result['d_port'] ) === '' )
 
         $result = array(
             'd_port' => $d_port,
             'rate_riga' => $riga_search_result[$d_port],
             'rate_klaipeda' => $klaipeda_search_result[$d_port]
         );
-
 
         //-------------------------------------------------------------------------
         if ( $this->getModel()->saveRequest( $form, $result ) ) { //дергаем в модели метод saveRequest, и если вернулось true то выполняем какие то действия и выводим сообщение
@@ -123,8 +81,29 @@ class MaritinaControllerMaritina extends JControllerLegacy{
     /*
                     FUNCTIONS
     */
+    //получения данных из гшит либо из бд по таймеру
+    public function refresh(){
+        //получение данных из конфига
+        $params = JComponentHelper::getParams( 'com_maritina' );
+        $spreadsheetId_riga = $params->get('spreadsheet_id_riga');
+        $range_riga = $params->get('range_riga');
+        $spreadsheetid_klaipeda = $params->get('spreadsheet_id_klaipeda');
+        $range_klaipeda = $params->get('range_klaipeda');
+        $refreshTime = $params->get('refresh_time');
+        $currentTime = time();
+
+        $dbTime = intval($this->getModel()->getDataFromDb('time'));
+        if($dbTime === null || ($currentTime - $dbTime) > $refreshTime){
+            $service = self::getClient();
+            //массив всех данных из гшита
+            $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId_riga, $range_riga, $last_update = 0);
+            $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetid_klaipeda, $range_klaipeda, $last_update = 0);
+            $this->getModel()->truncateDb();
+            $this->getModel()->saveData($currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list);
+        }
+    }
 //поиск нужного значения
-    static function searchNeeded($d_port_needed, $ft_needed, $dp_20ft_40ft_list){
+    public function searchNeeded($d_port_needed, $ft_needed, $dp_20ft_40ft_list){
         $result = null;
         $key = array_search($d_port_needed, array_column($dp_20ft_40ft_list, 'port'));
         if(false !== $key){
@@ -135,7 +114,7 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         return $result;
     }
 //вынимаем данные из таблицы
-    static function getDataFromSheet($service, $spreadsheetId, $range, $time){
+    public function getDataFromSheet($service, $spreadsheetId, $range, $time){
         $response = $service->spreadsheets_values->get($spreadsheetId, $range, ['valueRenderOption' => 'UNFORMATTED_VALUE']);
         $values = $response->getValues();
         $list = null;
@@ -148,7 +127,7 @@ class MaritinaControllerMaritina extends JControllerLegacy{
                     continue;
                 }
                 $list[$i] = array(
-                    'port' => mb_strtolower($row[0]),
+                    'port' => mb_strtoupper($row[0]),
                     '20ft' => $row[34],
                     '40ft' => $row[35]);
                 $i++;
@@ -158,7 +137,7 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         return $list;
     }
 //подключение к шит апи
-    static function getClient(){
+    public function getClient(){
         //oAuth
         $googleAccountKeyFilePath = __DIR__ . '/credentialsGSheets.json';
         putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath );
@@ -170,9 +149,8 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         return $service;
         //
     }
+
     //-------------------------------------------------------------------------
-
-
 }
 
 

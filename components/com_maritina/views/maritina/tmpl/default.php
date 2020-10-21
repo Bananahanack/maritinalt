@@ -3,21 +3,36 @@
 defined( '_JEXEC' ) or die; // No direct access
 ?>
 <div class="item-page">
-	<h1></h1>
+	<h1>
+    </h1>
 
 <!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
 
     <form action="" method="post" id="formRates">
 
-        <div>
-            <label for="d_port">Discharge port</label>
-            <input type="text" name="form[d_port]" id="d_port" value="" required="required">
+<!--        <div>-->
+<!--            <label for="d_port">Discharge port</label>-->
+<!--            <input type="text" name="form[d_port]" id="d_port" value="" required="required">-->
+<!---->
+<!--        </div>-->
 
-        </div>
+        <?php
+        if ($this->items !== 0) {
+            ?>
+            <select name="form[d_port]" id="d_port" style="width: 25%">
+                <?php foreach ($this->items as $item) { ?>
+                    <option><?php echo $item; ?></option>
+                <?php } ?>
+            </select>
+            <?php
+        } else {
+            echo 'Sorry! No data found...';
+        }
+        ?>
 
         <div >
             <div>
-                <select name="form[ft]" id="ft">
+                <select name="form[ft]" id="ft" style="width: 25%">
                     <option value="20ft" selected>20ft</option>
                     <option value="40ft">40ft</option>
                 </select>
@@ -45,6 +60,8 @@ defined( '_JEXEC' ) or die; // No direct access
         <?php echo JHtml::_( 'form.token' ); ?>
 	</form>
     <div id="get_rates_form_result"></div>
+
+
 
 </div>
 <script>
@@ -98,17 +115,17 @@ defined( '_JEXEC' ) or die; // No direct access
                         '<table>' +
                             '<tr> ' +
                                 '<th>Port of Dispatch</th>' +
-                                '<th>Destination port</th>' +
+                                // '<th>Destination port</th>' +
                                 '<th>Selling rates</th>' +
                             ' </tr>' +
                             '<tr> ' +
-                                '<th>Riga</th>' +
-                                '<th>'+response.d_port+'</th>' +
+                                '<th>RIGA</th>' +
+                                // '<th>'+response.d_port+'</th>' +
                                 '<th>'+response.rate_riga+'</th>' +
                             ' </tr>' +
                             '<tr> ' +
-                                '<th>Klaipeda</th>' +
-                                '<th>'+response.d_port+'</th>' +
+                                '<th>KLAIPEDA</th>' +
+                                // '<th>'+response.d_port+'</th>' +
                                 '<th>'+response.rate_klaipeda+'</th>' +
                             ' </tr>' +
                         '</table>'
