@@ -123,13 +123,13 @@ class MaritinaControllerMaritina extends JControllerLegacy{
             print "No data found.\n";
         }else{
             foreach ($values as $row) {
-                if( trim($row[0]) === '' || (trim($row[34]) === '' && trim($row[35]) === '')){
+                if( trim($row[0]) === '' || (trim($row[count($row) - 2]) === '' && trim($row[[count($row) - 1]]) === '')){
                     continue;
                 }
                 $list[$i] = array(
                     'port' => mb_strtoupper($row[0]),
-                    '20ft' => $row[34],
-                    '40ft' => $row[35]);
+                    '20ft' => $row[count($row) - 2],
+                    '40ft' => $row[count($row) - 1]);
                 $i++;
 
             }

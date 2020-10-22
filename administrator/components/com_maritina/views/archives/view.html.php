@@ -45,8 +45,8 @@ class MaritinaViewArchives extends JViewLegacy
 		$this->loadHelper( 'maritina' );
 		if ( $this->getLayout() !== 'modal' ) {
 			$this->addToolbar();
-			maritinaHelper::addSubmenu( 'archives' );
-			$this->sidebar = JHtmlSidebar::render();
+//			maritinaHelper::addSubmenu( 'archives' );
+//			$this->sidebar = JHtmlSidebar::render();
 		}
 		parent::display( $tpl );
 	}
@@ -56,8 +56,11 @@ class MaritinaViewArchives extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
+
 		JToolBarHelper::title( JText::_( 'COM_MARITINA' ) );
 		$canDo = maritinaHelper::getActions( 'archive' );
+
+
 
         if ( $canDo->get( 'core.delete' ) ) {
             JToolBarHelper::deleteList( 'DELETE_QUERY_STRING', 'archives.delete', 'JTOOLBAR_DELETE' );
@@ -68,6 +71,9 @@ class MaritinaViewArchives extends JViewLegacy
             JToolBarHelper::preferences( 'com_maritina' );
             JToolBarHelper::divider();
         }
+
+        JToolbarHelper::custom('archives.update', '', '', 'RefreshData', false );
+        JToolBarHelper::divider();
 	}
 
 	protected function getSortFields()
@@ -76,7 +82,8 @@ class MaritinaViewArchives extends JViewLegacy
 			'ordering' => JText::_( 'JGRID_HEADING_ORDERING' ),
 			'title' => JText::_( 'JGLOBAL_TITLE' ),
 			'created' => JText::_( 'JDATE' ),
-			'id' => JText::_( 'JGRID_HEADING_ID' )
+			'id' => JText::_( 'JGRID_HEADING_ID' ),
+
 		);
 	}
 }

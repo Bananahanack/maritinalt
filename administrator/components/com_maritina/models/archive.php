@@ -94,4 +94,35 @@ class MaritinaModelArchive extends JModelAdmin {
 		}
 	}
 
+    //-------------------------------------------------------------------------
+    /*
+                    FUNCTIONS
+    */
+
+    //сохраняем данные, чтобы потом достать при запросе
+    public function saveData( $currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list){
+        $table = $this->getTable('maritina_refresh');
+
+        $archiveData = array(
+            'time' => $currentTime,
+            'riga_data_list' => json_encode($riga_20ft_40ft_list),
+            'klaipeda_data_list' => json_encode($klaipeda_20ft_40ft_list)
+        );
+        //Заносим данные в таблицу
+        $table->bind( $archiveData );
+        if ( $table->store() ) {
+            return true;
+        }
+        return false;
+    }
+
+    //truncate table
+    public function truncateDb(){
+        $db = $this->getDbo();
+        if($db->setQuery( 'TRUNCATE TABLE m2gfc_maritina_refresh')->execute()){
+            return true;
+        }
+        return false;
+    }
+
 }

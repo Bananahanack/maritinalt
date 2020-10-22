@@ -42,7 +42,6 @@ class MaritinaViewMaritina extends JViewLegacy
 	}
 
     public function getData(){
-
         $riga_20ft_40ft_list = json_decode($this->getModel()->getDataFromDb('riga_data_list'), true);
         $klaipeda_20ft_40ft_list = json_decode($this->getModel()->getDataFromDb('klaipeda_data_list'), true);
         $riga_ports = array_column($riga_20ft_40ft_list, 'port');

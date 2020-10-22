@@ -8,98 +8,85 @@ defined( '_JEXEC' ) or die; // No direct access
 
 <!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
 
-    <form action="" method="post" id="formRates">
+    <form action="" method="post" id="formRates" class="ui-form">
 
 <!--        <div>-->
 <!--            <label for="d_port">Discharge port</label>-->
 <!--            <input type="text" name="form[d_port]" id="d_port" value="" required="required">-->
 <!---->
 <!--        </div>-->
+        <label for="l_port" style="color: white">Loading port: </label>
+        <span class="custom-dropdown">
+            <select name="form[l_port]" id="l_port"">
+                    <option>RIGA</option>
+                    <option>KLAIPEDA</option>
+            </select>
+        </span>
+
+        <br></br>
 
         <?php
         if ($this->items !== 0) {
             ?>
-            <select name="form[d_port]" id="d_port" style="width: 25%">
+            <label for="d_port" style="color: white">Discharge port: </label>
+        <span class="custom-dropdown">
+            <select name="form[d_port]" id="d_port"">
                 <?php foreach ($this->items as $item) { ?>
                     <option><?php echo $item; ?></option>
                 <?php } ?>
             </select>
+        </span>
             <?php
         } else {
             echo 'Sorry! No data found...';
         }
         ?>
 
-        <div >
-            <div>
-                <select name="form[ft]" id="ft" style="width: 25%">
-                    <option value="20ft" selected>20ft</option>
-                    <option value="40ft">40ft</option>
-                </select>
-            </div>
+        <section class="dark">
+            <p style="color: white">Container Size:</p>
+            <label id="l1">
+                <input type="radio" name="form[ft]" id="ft1" value="20ft" checked>
+                <span class="design"></span>
+                <span class="text">20ft</span>
+            </label>
+        </section>
+        <section class="dark">
+            <label id="l2">
+                <input type="radio" name="form[ft]" id="ft2" value="40ft">
+                <span class="design"></span>
+                <span class="text">40ft</span>
+            </label>
+        </section>
+
+        <div id="dive">
+            <label for="email" style="color: white">Email:</label>
+            <input type="text" name="form[email]" id="email" value="" required="required" style="border-radius: 11px;">
         </div>
 
         <div>
-            <label for="email">E-mail</label>
-            <input type="email" name="form[email]" id="email" value="" required="required">
-        </div>
-
-        <div>
-        </div>
-
-        <div>
-            <label for="message">Comment</label>
-            <textarea name="form[message]" id="message"></textarea>
+            <label for="message" style="color: white">Comment</label>
+            <textarea cols="1" rows="2"  name="form[message]" id="message" style="width: 85%; background: rgba(255,255,255,1);color: black;resize: horizontal;border-radius: 11px;"></textarea>
         </div>
 
         <input type="hidden" name="option" value="com_maritina">
         <input type="hidden" name="task" value="maritina.send">
-
         <button type="submit" id="btn">Get Rates</button>
 
         <?php echo JHtml::_( 'form.token' ); ?>
+        <br><br>
+        <div id="get_rates_form_result"></div>
+
 	</form>
-    <div id="get_rates_form_result"></div>
-
-
 
 </div>
+
 <script>
-
-    // jQuery(document).ready(function($) {
-    //     $('#d_port').autocomplete({
-    //         source: function () {
-    //             var form = $(this);
-    //             // организуем кроссдоменный запрос
-    //             $.ajax({
-    //                 // type: 'POST',
-    //                 // cache: false,
-    //                 dataType: 'json',
-    //                 url: 'index.php?format=raw&option=com_maritina&task=autoComplete',
-    //                 url: form.attr('action'),
-    //                 data:form.serializeArray(),
-    //                 // параметры запроса, передаваемые на сервер (последний - подстрока для поиска):
-    //                 // data: {
-    //                 //     name_startsWith: request.term
-    //                 // },
-    //                 // обработка успешного выполнения запроса
-    //                 success: function (response) {
-    //                     // приведем полученные данные к необходимому формату и передадим в предоставленную функцию response
-    //
-    //                     alert(response.message);
-    //                     form.find('button[type="submit"]').show();
-    //                     }
-    //             });
-    //         },
-    //         // minLength: 2
-    //     });
-    // });
-//refresh button //
-
     jQuery(document).ready(function ($) {
         $('#formRates').submit(function (e) {
             e.preventDefault();
             var form = $(this);
+            // var email = $("#email").val();
+
             //form.find('button[type="submit"]').hide();
             $.ajax({
                 type: 'POST',
@@ -114,19 +101,19 @@ defined( '_JEXEC' ) or die; // No direct access
                     $('#get_rates_form_result').html(
                         '<table>' +
                             '<tr> ' +
-                                '<th>Port of Dispatch</th>' +
-                                // '<th>Destination port</th>' +
-                                '<th>Selling rates</th>' +
+                                '<th style="background: #8b98b0" style="border-radius: 10px;">Port of Dispatch</th>' +
+                                '<th style="background: #8b98b0">Destination port</th>' +
+                                '<th style="background: #8b98b0">Selling rates</th>' +
                             ' </tr>' +
                             '<tr> ' +
-                                '<th>RIGA</th>' +
-                                // '<th>'+response.d_port+'</th>' +
-                                '<th>'+response.rate_riga+'</th>' +
+                                '<th style="background: #cfdbdb"><label style="color: #808080">RIGA</label></th>' +
+                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.d_port+'</label></th>' +
+                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.rate_riga+'</label></th>' +
                             ' </tr>' +
                             '<tr> ' +
-                                '<th>KLAIPEDA</th>' +
-                                // '<th>'+response.d_port+'</th>' +
-                                '<th>'+response.rate_klaipeda+'</th>' +
+                                '<th style="background: #cfdbdb"><label style="color: #808080">KLAIPEDA</th>' +
+                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.d_port+'</label></th>' +
+                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.rate_klaipeda+'</label></th>' +
                             ' </tr>' +
                         '</table>'
                     );
@@ -136,14 +123,10 @@ defined( '_JEXEC' ) or die; // No direct access
     });
 </script>
 
-
-<!--    jQuery(document).ready(function() {
-
-        var flowers = ["Астра", "Нарцисс", "Роза", "Пион", "Примула",
-            "Подснежник", "Мак", "Первоцвет", "Петуния", "Фиалка"];
-
-        $('#d_port').autocomplete({
-            source: flowers
-        })
-    });
-    -->
+<!--        <div >-->
+<!--            <div>-->
+<!--                <select name="form[ft]" id="ft" style="width: 25%">-->
+<!--                    <option value="20ft" selected>20ft</option>-->
+<!--                    <option value="40ft">40ft</option>-->
+<!--                </select>-->
+<!--            </div>-->
