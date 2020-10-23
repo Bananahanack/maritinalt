@@ -98,8 +98,7 @@ class MaritinaModelArchive extends JModelAdmin {
     /*
                     FUNCTIONS
     */
-
-    //сохраняем данные, чтобы потом достать при запросе
+//сохраняем данные, чтобы потом достать при запросе
     public function saveData( $currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list){
         $table = $this->getTable('maritina_refresh');
 
@@ -116,7 +115,7 @@ class MaritinaModelArchive extends JModelAdmin {
         return false;
     }
 
-    //truncate table
+//truncate table
     public function truncateDb(){
         $db = $this->getDbo();
         if($db->setQuery( 'TRUNCATE TABLE m2gfc_maritina_refresh')->execute()){
@@ -124,5 +123,4 @@ class MaritinaModelArchive extends JModelAdmin {
         }
         return false;
     }
-
 }

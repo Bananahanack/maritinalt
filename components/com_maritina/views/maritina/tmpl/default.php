@@ -3,44 +3,28 @@
 defined( '_JEXEC' ) or die; // No direct access
 ?>
 <div class="item-page">
-	<h1>
-    </h1>
-
+	<h1></h1>
 <!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
 
     <form action="" method="post" id="formRates" class="ui-form">
 
-<!--        <div>-->
-<!--            <label for="d_port">Discharge port</label>-->
-<!--            <input type="text" name="form[d_port]" id="d_port" value="" required="required">-->
-<!---->
-<!--        </div>-->
-        <label for="l_port" style="color: white">Loading port: </label>
+        <label for="form[l_port]" style="color: white">Loading port: </label>
         <span class="custom-dropdown">
-            <select name="form[l_port]" id="l_port"">
-                    <option>RIGA</option>
-                    <option>KLAIPEDA</option>
+            <select name="form[l_port]" id="l_port" onchange="loadDPort(this)">
+                    <option></option>
+                    <option value="RIGA">RIGA</option>
+                    <option value="KLAIPEDA">KLAIPEDA</option>
             </select>
         </span>
 
         <br></br>
 
-        <?php
-        if ($this->items !== 0) {
-            ?>
-            <label for="d_port" style="color: white">Discharge port: </label>
+        <label for="form[d_port]" style="color: white">Destination port: </label>
         <span class="custom-dropdown">
-            <select name="form[d_port]" id="d_port"">
-                <?php foreach ($this->items as $item) { ?>
-                    <option><?php echo $item; ?></option>
-                <?php } ?>
+            <select name="form[d_port]" id="d_port" disabled="disabled">
+                    <option>Select loading port</option>
             </select>
         </span>
-            <?php
-        } else {
-            echo 'Sorry! No data found...';
-        }
-        ?>
 
         <section class="dark">
             <p style="color: white">Container Size:</p>
@@ -70,8 +54,7 @@ defined( '_JEXEC' ) or die; // No direct access
 
         <input type="hidden" name="option" value="com_maritina">
         <input type="hidden" name="task" value="maritina.send">
-        <button type="submit" id="btn">Get Rates</button>
-
+        <button type="submit" id="btn">Get Rate</button>
         <?php echo JHtml::_( 'form.token' ); ?>
         <br><br>
         <div id="get_rates_form_result"></div>
@@ -81,13 +64,29 @@ defined( '_JEXEC' ) or die; // No direct access
 </div>
 
 <script>
+    function loadDPort(select) {
+        var dPortSelect = $('select[name="form[d_port]"]');
+        dPortSelect.attr('disabled', 'disabled'); // делаем список не активным
+
+        $.getJSON('index.php?option=com_maritina&task=maritina.getDportData',
+            {action: 'getDestinationPort', l_port: select.value},
+            function(lPortList){
+                dPortSelect.html(''); // очищаем список
+
+                // заполняем список пришедшими данными
+                $.each(lPortList, function(i){
+                    dPortSelect.append(
+                        '<option value="' + this + '">' + this + '</option>'
+                    );
+                });
+                dPortSelect.removeAttr('disabled'); // делаем список активным
+            });
+    }
+
     jQuery(document).ready(function ($) {
         $('#formRates').submit(function (e) {
             e.preventDefault();
             var form = $(this);
-            // var email = $("#email").val();
-
-            //form.find('button[type="submit"]').hide();
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -99,34 +98,16 @@ defined( '_JEXEC' ) or die; // No direct access
                         //выполняем какие до дейстивя если нужно при успешной отправке формы
                     // }
                     $('#get_rates_form_result').html(
-                        '<table>' +
-                            '<tr> ' +
-                                '<th style="background: #8b98b0" style="border-radius: 10px;">Port of Dispatch</th>' +
-                                '<th style="background: #8b98b0">Destination port</th>' +
-                                '<th style="background: #8b98b0">Selling rates</th>' +
-                            ' </tr>' +
-                            '<tr> ' +
-                                '<th style="background: #cfdbdb"><label style="color: #808080">RIGA</label></th>' +
-                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.d_port+'</label></th>' +
-                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.rate_riga+'</label></th>' +
-                            ' </tr>' +
-                            '<tr> ' +
-                                '<th style="background: #cfdbdb"><label style="color: #808080">KLAIPEDA</th>' +
-                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.d_port+'</label></th>' +
-                                '<th style="background: #cfdbdb"><label style="color: #808080">'+response.rate_klaipeda+'</label></th>' +
-                            ' </tr>' +
-                        '</table>'
+                        '<p style="color: black">' + response + '</p>'
+                        // '<table>' +
+                        // '<tr> ' +
+                        // '<th style="background: #8b98b0">' + response + '</th>' +
+                        // ' </tr>' +
+                        // '</table>'
                     );
                 }
             });
         });
     });
-</script>
 
-<!--        <div >-->
-<!--            <div>-->
-<!--                <select name="form[ft]" id="ft" style="width: 25%">-->
-<!--                    <option value="20ft" selected>20ft</option>-->
-<!--                    <option value="40ft">40ft</option>-->
-<!--                </select>-->
-<!--            </div>-->
+</script>

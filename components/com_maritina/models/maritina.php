@@ -21,11 +21,11 @@ class MaritinaModelMaritina extends JModelLegacy{
     public function saveRequest( $data , $result )
     {
         $body = '<table class="table table-bordered table-striped table-hover">';
-        $body .= '<tr><td>Port:</td><td>' . $data['d_port'] . '</td></tr>';
+        $body .= '<tr><td>Loading port:</td><td>' . $data['l_port'] . '</td></tr>';
+        $body .= '<tr><td>Destination port:</td><td>' . $data['d_port'] . '</td></tr>';
         $body .= '<tr><td>Container type:</td><td>' . $data['ft'] . '</td></tr>';
         $body .= '<tr><td>E-mail:</td><td>' . $data['email'] . '</td></tr>';
-        $body .= '<tr><td>Rate Riga:</td><td>' . $result['rate_riga']  . '</td></tr>';
-        $body .= '<tr><td>Rate Klaipeda:</td><td>' . $result['rate_klaipeda']. '</td></tr>';
+        $body .= '<tr><td>Rate:</td><td>' . $result . '</td></tr>';
         $body .= '<tr><td>Comment:</td><td>' . $data['message'] . '</td></tr>';
         $body .= '</table>';
 
@@ -35,9 +35,6 @@ class MaritinaModelMaritina extends JModelLegacy{
             'text' => $body
         );
 
-
-
-
         //Заносим данные в таблицу
         $table->bind( $archiveData );
         if ( $table->store() ) {
@@ -46,13 +43,13 @@ class MaritinaModelMaritina extends JModelLegacy{
         return false;
     }
 
-    //подтягиваем данные из БД
+//подтягиваем данные из БД
     public function getDataFromDb($columnString){
         $db = $this->getDbo();
         return $db->setQuery( 'SELECT ' . $columnString . ' FROM m2gfc_maritina_refresh')->loadResult();
     }
 
-    //truncate table
+//truncate table
     public function truncateDb(){
         $db = $this->getDbo();
         if($db->setQuery( 'TRUNCATE TABLE m2gfc_maritina_refresh')->execute()){
@@ -61,10 +58,13 @@ class MaritinaModelMaritina extends JModelLegacy{
         return false;
     }
 
-    //сохраняем данные, чтобы потом достать при запросе
+//сохраняем данные, чтобы потом достать при запросе
     public function saveData( $currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list){
-        $table = $this->getTable('maritina_refresh');
-
+        try {
+            $table = $this->getTable('maritina_refresh');
+        } catch (Exception $e) {
+            echo 'Can\'t found table "maritina_refresh" doesn\'t exist in DataBase', $e ->getMessage(), "\n";
+        }
         $archiveData = array(
             'time' => $currentTime,
             'riga_data_list' => json_encode($riga_20ft_40ft_list),
@@ -77,14 +77,4 @@ class MaritinaModelMaritina extends JModelLegacy{
         }
         return false;
     }
-
-    public function getDports(){
-
-    }
-
-
-
-
-
-
 }

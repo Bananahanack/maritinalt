@@ -72,42 +72,52 @@ class MaritinaControllerArchives extends JControllerAdmin
         $currentTime = time();
 
         $service = self::getClient();
+
         //массив всех данных из гшита
         $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId_riga, $range_riga);
         $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetid_klaipeda, $range_klaipeda);
+
         $this->getModel()->truncateDb();
         $this->getModel()->saveData($currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list);
 
-
-
-//	    return true;
+        echo var_dump($riga_20ft_40ft_list);
+        echo var_dump($klaipeda_20ft_40ft_list);
+//        return true;
     }
 
-    //вынимаем данные из таблицы
+//вынимаем данные из таблицы
     public function getDataFromSheet($service, $spreadsheetId, $range){
         $response = $service->spreadsheets_values->get($spreadsheetId, $range, ['valueRenderOption' => 'UNFORMATTED_VALUE']);
         $values = $response->getValues();
-        $list = null;
+        $valuesList = NULL;
+        $cellNumber = 0;
         $i = 0;
-        if (empty($values)) {
-            print "No data found.\n";
-        }else{
-            foreach ($values as $row) {
-                if( trim($row[0]) === '' || (trim($row[count($row) - 2]) === '' && trim($row[[count($row) - 1]]) === '')){
-                    continue;
-                }
-                $list[$i] = array(
-                    'port' => mb_strtoupper($row[0]),
-                    '20ft' => $row[count($row) - 2],
-                    '40ft' => $row[count($row) - 1]);
-                $i++;
 
+        foreach ($values as $row){
+            if($cellNumber < count($row)){
+                $cellNumber = count($row);
             }
         }
-        return $list;
+
+        if (empty($values)) {
+            throw new \http\Exception\RuntimeException("NO DATA IN GOOGLE SPREADSHEET FILE");
+        }else{
+            foreach ($values as $row) {
+                if( $cellNumber > count($row) ){
+                    continue;
+                }
+                $values_list[$i] = array(
+                    'port' => mb_strtoupper($row[0]),
+                    '20ft' => trim($row[count($row) - 2]),
+                    '40ft' => trim($row[count($row) - 1])
+                );
+                $i++;
+            }
+        }
+        return $values_list;
     }
 
-    //подключение к шит апи
+//подключение к шит апи
     public function getClient(){
         //oAuth
         $googleAccountKeyFilePath = __DIR__ . '/credentialsGSheets.json';
@@ -118,7 +128,6 @@ class MaritinaControllerArchives extends JControllerAdmin
         $client->setScopes(Google_Service_Sheets::SPREADSHEETS_READONLY);
         $service = new Google_Service_Sheets( $client );
         return $service;
-        //
     }
     //-------------------------------------------------------------------------
 }
