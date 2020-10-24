@@ -1,0 +1,285 @@
+@import url(https://fonts.googleapis.com/css?family=Patua+One&display=swap);
+@font-face{
+    font-family:Algerian;
+    src:url(../fonts/Algerian.ttf)
+}
+*{
+    margin:0;
+    padding:0;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    text-decoration:none;
+    list-style:none;
+    outline:0;
+    font-family:'Patua One',sans-serif!important
+}
+h1,h2,h3,h4,h5,h6,hr,p,ul{
+    margin:0;
+    padding:0
+}
+.card{
+    border:none
+}
+a,button,input{
+    transition:.5s
+}
+a:hover,button:hover,input:hover{
+    outline:0;
+    text-decoration:none
+}
+.mw{
+    width:100%;
+    max-width:1300px;
+    margin:0 auto;
+    position:relative
+}
+body{
+    background:url(../images/main_bg.png) no-repeat center center/cover;
+    width:100%
+}
+.page{
+    overflow:hidden
+}
+.page .main{
+}
+.page .main .mw{
+    padding:2vh;
+    height:100vh
+}
+.page .main .mw .header{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    position:absolute;
+    top:2vh;
+    width:100%;
+    left:0;
+    right:0;
+    padding:0 2vh
+}
+.page .main .mw .header .left_side .logo{
+    width:240px
+}
+.page .main .mw .header .left_side .logo img{
+    width:100%
+}
+.page .main .mw .header .center .h2{
+    color:#fff;
+    font-weight:400;
+    font-family:Algerian,sans-serif!important
+}
+.page .main .mw .header .right_side .img{
+    width:200px
+}
+.page .main .mw .header .right_side .img img{
+    width:100%;
+    opacity:.4
+}
+.page .main .mw .main_cont{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    width:100%;
+    padding-top:100px;
+    z-index:2;
+    position:relative
+}
+.page .main .mw .main_cont .contact{
+    width:100%;
+    max-width:400px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:30px
+}
+.page .main .mw .main_cont .contact .flag_country{
+    width:100%;
+    max-width:240px;
+    margin:0 auto
+}
+.page .main .mw .main_cont .contact .flag_country img{
+    width:100%
+}
+.page .main .mw .main_cont .contact .h3{
+    color:#fff;
+    text-align:center;
+    font-weight:400;
+    padding-bottom:20px;
+    font-size:30px
+}
+.page .main .mw .main_cont .contact ul li{
+    color:rgba(255,255,255,.8);
+    text-align:center;
+    font-weight:400;
+    font-size:20px;
+    padding-bottom:10px
+}
+.page .main .mw .main_cont .contact ul li:last-child{
+    padding-bottom:0
+}
+@media (max-width:575px){
+    .page .main .mw{
+        padding:2vh;
+        min-height:100vh;
+        height:100%;
+        padding-bottom:40px
+    }
+    .page .main .mw .header{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        position:relative;
+        width:100%
+    }
+    .page .main .mw .header .left_side{
+        width:100%
+    }
+    .page .main .mw .header .left_side .logo{
+        margin:0 auto
+    }
+    .page .main .mw .header .center .h2{
+        text-align:center;
+        padding:10px 0
+    }
+    .page .main .mw .header .right_side .img{
+        width:80px
+    }
+    .page .main .mw .main_cont{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center
+    }
+    .page .main .mw .main_cont .contact{
+        margin:20px
+    }
+    .page .main .mw .main_cont .contact .h3{
+        padding-bottom:15px;
+        font-size:24px
+    }
+    .page .main .mw .main_cont .contact ul li{
+        font-size:18px;
+        padding-bottom:6px
+    }
+    .page .main .mw .main_cont .contact ul li:last-child{
+        padding-bottom:0
+    }
+}
+@media (min-width:576px) and (max-width:991px){
+    .page .main .mw{
+        padding:2vh;
+        min-height:100vh;
+        height:100%;
+        padding-bottom:40px
+    }
+    .page .main .mw .header{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        position:relative;
+        width:100%
+    }
+    .page .main .mw .header .left_side{
+        width:100%
+    }
+    .page .main .mw .header .left_side .logo{
+        margin:0 auto
+    }
+    .page .main .mw .header .center .h2{
+        text-align:center;
+        padding:10px 0
+    }
+    .page .main .mw .header .right_side .img{
+        width:80px
+    }
+    .page .main .mw .main_cont .contact{
+        margin:20px
+    }
+    .page .main .mw .main_cont .contact .h3{
+        padding-bottom:15px;
+        font-size:24px
+    }
+    .page .main .mw .main_cont .contact ul li{
+        font-size:18px;
+        padding-bottom:6px
+    }
+    .page .main .mw .main_cont .contact ul li:last-child{
+        padding-bottom:0
+    }
+}
+@media (min-width:768px) and (max-width:991px){
+    .page .header .mw .left_side .logo a{
+        height:60px
+    }
+    .page .header .mw .right_side .nav{
+        display:none
+    }
+    .page .header .mw .right_side .o_xs_menu{
+        display:-webkit-box;
+        display:-webkit-flex;
+        display:-ms-flexbox;
+        display:flex
+    }
+    .page .sticky .mw .left_side .logo a{
+        height:40px
+    }
+    .page .xs_menu{
+        display:block
+    }
+    .page .main .mw .main_cont .h1{
+        font-size:45px;
+        padding-bottom:20px
+    }
+    .page .main .mw .main_cont .h2{
+        font-size:22px;
+        padding-bottom:30px
+    }
+    .page .about .mw .right_side .m_title .h3{
+        text-align:left
+    }
+    .page .about .mw .right_side .h5{
+        font-size:16px
+    }
+    .page .about .mw .right_side ul li{
+        font-size:16px
+    }
+    .page .about .mw .right_side ul li .fas_icon{
+        font-size:18px;
+        margin-top:0
+    }
+    .page .m_title .h3{
+        text-align:center
+    }
+    .page .m_title .h3:after{
+        height:6px
+    }
+    .page .choose_product .mw .cont .left_side .h2{
+        font-size:30px
+    }
+    .page .benefits .mw .m_title .h3,.page .benefits .mw .m_title .h5{
+        text-align:center
+    }
+    .page .products .cont ul li{
+        width:100%;
+        max-width:300px;
+        margin:0 auto
+    }
+    .page .products .cont ul li a .img{
+        height:200px;
+        display:flex;
+        flex-direction:row;
+        justify-content:center;
+        align-items:flex-start
+    }
+    .page .contacts .mw .cont_line ul li{
+        margin-bottom:20px
+    }
+}
+

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<extension type="template" version="1.0.0" method="upgrade" client="site">
+    <name>maritina</name>
+    <author>Yury Shumski</author>
+    <authorEmail>jurichus94@gmail.com</authorEmail>
+    <authorUrl></authorUrl>
+    <copyright>Bananahanack 2020</copyright>
+    <license></license>
+    <version>1.0</version>
+    <description>TPL_MARITINA_DESC</description>
+    <files>
+        <folder>css</folder>
+        <folder>html</folder>
+        <folder>images</folder>
+        <folder>scripts</folder>
+        <filename>index.php</filename>
+        <filename>index.html</filename>
+    </files>
+     <positions>
+		<position>header</position>
+		<position>content</position>
+    </positions>
+	<languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.tpl_maritina.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.tpl_maritina.ini</language>
+        <language tag="en-GB">en-GB/en-GB.tpl_maritina.sys.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.tpl_maritina.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="advanced">
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

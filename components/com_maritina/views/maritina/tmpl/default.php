@@ -2,59 +2,70 @@
 /** @var $this MaritinaViewMaritina */
 defined( '_JEXEC' ) or die; // No direct access
 ?>
-<div class="item-page">
-	<h1></h1>
+<div>
+	<h2 align="center" style = "color: white" >CALCULATE PRICE</h2>
+
 <!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
 
     <form action="" method="post" id="formRates" class="ui-form">
 
-        <label for="form[l_port]" style="color: white">Loading port: </label>
-        <span class="custom-dropdown">
-            <select name="form[l_port]" id="l_port" onchange="loadDPort(this)">
-                    <option></option>
-                    <option value="RIGA">RIGA</option>
-                    <option value="KLAIPEDA">KLAIPEDA</option>
-            </select>
-        </span>
-
-        <br></br>
-
-        <label for="form[d_port]" style="color: white">Destination port: </label>
-        <span class="custom-dropdown">
-            <select name="form[d_port]" id="d_port" disabled="disabled">
-                    <option>Select loading port</option>
-            </select>
-        </span>
-
-        <section class="dark">
-            <p style="color: white">Container Size:</p>
-            <label id="l1">
-                <input type="radio" name="form[ft]" id="ft1" value="20ft" checked>
-                <span class="design"></span>
-                <span class="text">20ft</span>
-            </label>
-        </section>
-        <section class="dark">
-            <label id="l2">
-                <input type="radio" name="form[ft]" id="ft2" value="40ft">
-                <span class="design"></span>
-                <span class="text">40ft</span>
-            </label>
-        </section>
-
-        <div id="dive">
-            <label for="email" style="color: white">Email:</label>
-            <input type="text" name="form[email]" id="email" value="" required="required" style="border-radius: 11px;">
+        <div class="form-row">
+            <label for="form[l_port]">Loading port:</label>
+            <span class="custom-dropdown">
+                <select name="form[l_port]" id="l_port" onchange="loadDPort(this)" required="required" >
+                        <option value="">Please Select</option>
+                        <option value="RIGA">RIGA</option>
+                        <option value="KLAIPEDA">KLAIPEDA</option>
+                </select>
+            </span>
         </div>
 
-        <div>
-            <label for="message" style="color: white">Comment</label>
-            <textarea cols="1" rows="2"  name="form[message]" id="message" style="width: 85%; background: rgba(255,255,255,1);color: black;resize: horizontal;border-radius: 11px;"></textarea>
+        <div class="form-row">
+            <label for="form[d_port]">Destination port:</label>
+            <span class="custom-dropdown">
+                <select name="form[d_port]" id="d_port" disabled="disabled">
+                        <option>Select loading port</option>
+                </select>
+            </span>
         </div>
+
+        <div class="form-row">
+            <label>Container Size:</label>
+            <section class="dark">
+<!--                <p>Container Size:</p>-->
+                <label id="l1">
+                    <input type="radio" name="form[ft]" id="ft1" value="20ft" checked>
+                    <span class="design"></span>
+                    <span class="text">20ft</span>
+                </label>
+                <label id="l2">
+                    <input type="radio" name="form[ft]" id="ft2" value="40ft">
+                    <span class="design"></span>
+                    <span class="text">40ft</span>
+                </label>
+            </section>
+            <section class="dark">
+
+            </section>
+        </div>
+
+        <div class="form-row">
+            <div class="form-input-material">
+<!--                <label for="email">Email:</label>-->
+                <input type="email" name="form[email]" id="email" value="" placeholder="example@gmail.com" required="required">
+            </div>
+
+        </div>
+
+        <div class="form-row">
+<!--            <label for="message">Comment</label>-->
+            <textarea placeholder="Message..." rows="4"  name="form[message]" id="message"></textarea>
+        </div>
+
 
         <input type="hidden" name="option" value="com_maritina">
         <input type="hidden" name="task" value="maritina.send">
-        <button type="submit" id="btn">Get Rate</button>
+            <p><input type="submit" id="btn" value="GET QUOTE">
         <?php echo JHtml::_( 'form.token' ); ?>
         <br><br>
         <div id="get_rates_form_result"></div>
