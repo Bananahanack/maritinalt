@@ -1,7 +1,7 @@
 <?php
 // No direct access
 defined( '_JEXEC' ) or die;
-require_once(JPATH_LIBRARIES.DS.'gsheetlib'.DS.'google-api-client'.DS.'vendor'.DS.'autoload.php');
+require_once(JPATH_LIBRARIES.DIRECTORY_SEPARATOR.'gsheetlib'.DIRECTORY_SEPARATOR.'google-api-client'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 
 
 /**
@@ -186,7 +186,7 @@ class MaritinaControllerMaritina extends JControllerLegacy{
 //подключение к шит апи
     public function getClient(){
         //oAuth
-        $googleAccountKeyFilePath = __DIR__ . '/credentialsGSheets.json';
+        $googleAccountKeyFilePath = JPATH_LIBRARIES.DIRECTORY_SEPARATOR.'gsheetlib'.DIRECTORY_SEPARATOR. 'credentialsGSheets.json';
         putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath );
 
         $client = new Google_Client();

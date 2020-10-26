@@ -118,7 +118,7 @@ class MaritinaModelArchive extends JModelAdmin {
 //truncate table
     public function truncateDb(){
         $db = $this->getDbo();
-        if($db->setQuery( 'TRUNCATE TABLE m2gfc_maritina_refresh')->execute()){
+        if($db->setQuery( 'TRUNCATE TABLE #__maritina_refresh')->execute()){
             return true;
         }
         return false;

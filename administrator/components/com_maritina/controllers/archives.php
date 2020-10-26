@@ -2,7 +2,7 @@
 
 // No direct access
 defined( '_JEXEC' ) or die;
-require_once(JPATH_LIBRARIES.DS.'gsheetlib'.DS.'google-api-client'.DS.'vendor'.DS.'autoload.php');
+require_once(JPATH_LIBRARIES.DIRECTORY_SEPARATOR.'gsheetlib'.DIRECTORY_SEPARATOR.'google-api-client'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 /**
  * Controller for list current element
  * @author Aleks.Denezh
@@ -103,7 +103,7 @@ class MaritinaControllerArchives extends JControllerAdmin
             throw new \http\Exception\RuntimeException("NO DATA IN GOOGLE SPREADSHEET FILE");
         }else{
             foreach ($values as $row) {
-                if( $cellNumber > count($row) ){
+                if( $cellNumber > count($row) || ($row[0] === '') ){
                     continue;
                 }
                 $values_list[$i] = array(
@@ -120,7 +120,7 @@ class MaritinaControllerArchives extends JControllerAdmin
 //подключение к шит апи
     public function getClient(){
         //oAuth
-        $googleAccountKeyFilePath = __DIR__ . '/credentialsGSheets.json';
+        $googleAccountKeyFilePath = JPATH_LIBRARIES.DIRECTORY_SEPARATOR.'gsheetlib'.DIRECTORY_SEPARATOR. 'credentialsGSheets.json';
         putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . $googleAccountKeyFilePath );
 
         $client = new Google_Client();

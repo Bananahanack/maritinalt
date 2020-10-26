@@ -25,7 +25,7 @@ class MaritinaModelMaritina extends JModelLegacy{
         $body .= '<tr><td>Destination port:</td><td>' . $data['d_port'] . '</td></tr>';
         $body .= '<tr><td>Container type:</td><td>' . $data['ft'] . '</td></tr>';
         $body .= '<tr><td>E-mail:</td><td>' . $data['email'] . '</td></tr>';
-        $body .= '<tr><td>Rate:</td><td>' . $result . '</td></tr>';
+        $body .= '<tr><td>Quote:</td><td>' . $result . '</td></tr>';
         $body .= '<tr><td>Comment:</td><td>' . $data['message'] . '</td></tr>';
         $body .= '</table>';
 
@@ -46,13 +46,13 @@ class MaritinaModelMaritina extends JModelLegacy{
 //подтягиваем данные из БД
     public function getDataFromDb($columnString){
         $db = $this->getDbo();
-        return $db->setQuery( 'SELECT ' . $columnString . ' FROM m2gfc_maritina_refresh')->loadResult();
+        return $db->setQuery( 'SELECT ' . $columnString . ' FROM #__maritina_refresh')->loadResult();
     }
 
 //truncate table
     public function truncateDb(){
         $db = $this->getDbo();
-        if($db->setQuery( 'TRUNCATE TABLE m2gfc_maritina_refresh')->execute()){
+        if($db->setQuery( 'TRUNCATE TABLE #__maritina_refresh')->execute()){
             return true;
         }
         return false;

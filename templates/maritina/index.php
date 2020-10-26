@@ -17,6 +17,8 @@ JHtml::_('stylesheet', 'normalize.min.css', array('version' => 'auto', 'relative
 JHtml::_('stylesheet', 'style.min.css', array('version' => 'auto', 'relative' => true));
 JHtml::_('stylesheet', 'maritinaForm.css', array('version' => 'auto', 'relative' => true));
 
+$template_url = $this->baseurl . '/templates/' . $this->template;
+
 unset( $this->_links[array_search( array( 'relation' => 'canonical', 'relType' => 'rel', 'attribs' => array() ), $this->_links )] );
 $baseUrl = JUri::base();
 $isHomePage = $baseUrl === JUri::current();
@@ -65,7 +67,7 @@ $isHomePage = $baseUrl === JUri::current();
                 <div class="header">
                     <div class="left_side">
                         <div class="logo">
-                            <img src="images/logo.png" alt="Logo">
+                            <img src="<?php echo $template_url;?>/images/logo.png" alt="<?php echo  JText::_('TPL_WHITESQUARE_LOGO');?>">
                         </div>
                     </div>
 
@@ -78,7 +80,7 @@ $isHomePage = $baseUrl === JUri::current();
                     </div>
                     <div class="right_side">
                         <div class="img">
-                            <img src="images/25.png" alt="25">
+                            <img src="<?php echo $template_url;?>/images/25.png" alt="25">
                         </div>
                     </div>
                 </div>
@@ -86,7 +88,7 @@ $isHomePage = $baseUrl === JUri::current();
                 <div class="main_cont">
                     <div class="contact">
                         <div class="flag_country">
-                            <img src="images/lit_flag-04.png" alt="latvia">
+                            <img src="<?php echo $template_url;?>/images/lit_flag-04.png" alt="latvia">
                         </div>
 
                         <h3 class="h3">
@@ -100,12 +102,13 @@ $isHomePage = $baseUrl === JUri::current();
                             <li></li>
                             <li></li>
                             <li></li>
+                            <li></li>
                         </ul>
                     </div>
 
                     <div class="contact">
                         <div class="flag_country">
-                            <img src="images/lat_flag-03.png" alt="litva">
+                            <img src="<?php echo $template_url;?>/images/lat_flag-03.png" alt="litva">
                         </div>
                         <h3 class="h3"> RIGA, LATVIA </h3>
                         <ul>
@@ -115,16 +118,16 @@ $isHomePage = $baseUrl === JUri::current();
                             <li>e-mail: riga@maritina.lt</li>
                             <li></li>
                             <li></li>
-                            <li></li>
+
                         </ul>
                     </div>
 
                     <div class="contact">
                         <div class="flag_country">
-                            <img src="images/bel_flag-02.png" alt="BELARUS">
+                            <img src="<?php echo $template_url;?>/images/bel_flag-02.png" alt="BELARUS">
                         </div>
                         <h3 class="h3">
-                            BELARUS, MINSK
+                            MINSK, BELARUS
                         </h3>
                         <ul>
                             <li>UAB Maritina representative  at Belarus</li>

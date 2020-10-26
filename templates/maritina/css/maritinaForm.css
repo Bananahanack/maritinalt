@@ -1,6 +1,8 @@
 :root {
     --borderRadius: 13px;
     --primaryBackground: hsl(188, 66%, 43%);
+    --primaryFont: Algerian;
+    --primaryFontSize: 17px;
 }
 .ui-form {
     max-width: 25%;
@@ -13,10 +15,11 @@
     /*position: relative;*/
 
     /*max-width: 450px;*/
-    padding: 25px 25px 15px;
+    padding: 25px 25px 70px;
     margin: 25px auto 30px;
     /*border-radius: 20px;*/
     background: rgba(255, 255, 255, 0.1);
+    font-family: var(--primaryFont);
 }
 .form-row {
     position: relative;
@@ -40,6 +43,9 @@
     border-width: 0px;
     border-radius: var(--borderRadius);
 
+    float: left;
+    margin: 0 1px;
+
     tansition: all .3s linear;
 }
 .ui-form input[type="submit"]:hover {
@@ -49,20 +55,27 @@
     background: hsl(186, 69%, 37%);
 }
 
+.ui-form p{
+    float: right;
+    color: white;
+    margin: 0 0;
+    font-size: 50px;
+}
+
 .ui-form input[type="email"] {
-    border: 0;
+    border: 3px;
     border-radius: var(--borderRadius);
     -webkit-border-radius: 18px;
     -moz-border-radius: 18px;
     -khtml-border-radius: 18px;
-    padding: 0 15px;
+    padding: 0 .5em;
     background: var(--primaryBackground) !important;
     outline: none;
     min-height: inherit;
     height: 35px;
     width: 250px;
-    font-size: 15px;
-    font-family: "Courier New", Courier, monospace;
+    font-size: var(--primaryFontSize);
+    font-family: var(--primaryFont);
     color: white;
 }
 
@@ -72,18 +85,17 @@
 
 .ui-form textarea{
     width: 250px;
-    padding: 5px 15px;
+    padding: 5px .5em;
     margin-bottom: 10px;
     box-sizing: border-box;
     line-height: 20px;
     border: none;
     border-radius: var(--borderRadius);
-    font-family: 'Roboto', sans-serif;
+    font-family: Algerian;
+    font-size: var(--primaryFontSize);
     background: var(--primaryBackground);
     color: white;
     resize: none;
-
-    /*background: rgba(255,255,255,1);color: black;resize: horizontal;border-radius: 11px;*/
 }
 
 .ui-form textarea::placeholder{
@@ -154,8 +166,6 @@
 .custom-dropdown::after {
     color: rgba(0,0,0,.4);
 }
-
-
 
 /*radio*/
 section {

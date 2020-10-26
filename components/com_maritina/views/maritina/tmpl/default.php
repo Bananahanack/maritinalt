@@ -3,7 +3,7 @@
 defined( '_JEXEC' ) or die; // No direct access
 ?>
 <div>
-	<h2 align="center" style = "color: white" >CALCULATE PRICE</h2>
+	<h2 align="center" style = "color: white" >QUOTE CALCULATOR</h2>
 
 <!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
 
@@ -52,8 +52,9 @@ defined( '_JEXEC' ) or die; // No direct access
         <div class="form-row">
             <div class="form-input-material">
 <!--                <label for="email">Email:</label>-->
-                <input type="email" name="form[email]" id="email" value="" placeholder="example@gmail.com" required="required">
+                <input type="email" name="form[email]" id="email" value="" placeholder="Email" required="required">
             </div>
+<!--            "example@gmail.com"-->
 
         </div>
 
@@ -65,9 +66,9 @@ defined( '_JEXEC' ) or die; // No direct access
 
         <input type="hidden" name="option" value="com_maritina">
         <input type="hidden" name="task" value="maritina.send">
-            <p><input type="submit" id="btn" value="GET QUOTE">
+            <input type="submit" id="btn" value="GET QUOTE   >">
         <?php echo JHtml::_( 'form.token' ); ?>
-        <br><br>
+
         <div id="get_rates_form_result"></div>
 
 	</form>
@@ -109,7 +110,7 @@ defined( '_JEXEC' ) or die; // No direct access
                         //выполняем какие до дейстивя если нужно при успешной отправке формы
                     // }
                     $('#get_rates_form_result').html(
-                        '<p style="color: black">' + response + '</p>'
+                        '<p style="">' + response + '</p>'
                         // '<table>' +
                         // '<tr> ' +
                         // '<th style="background: #8b98b0">' + response + '</th>' +
