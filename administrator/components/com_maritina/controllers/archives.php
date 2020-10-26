@@ -77,12 +77,15 @@ class MaritinaControllerArchives extends JControllerAdmin
         $riga_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetId_riga, $range_riga);
         $klaipeda_20ft_40ft_list = self::getDataFromSheet($service, $spreadsheetid_klaipeda, $range_klaipeda);
 
-        $this->getModel()->truncateDb();
-        $this->getModel()->saveData($currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list);
-
-        echo var_dump($riga_20ft_40ft_list);
-        echo var_dump($klaipeda_20ft_40ft_list);
-//        return true;
+        if(!$this->getModel()->truncateDb()){
+            echo 'Can\'t trunkate table "#__maritina_refresh". The output data in Maritina form can be wrong!!! ';
+        }elseif ($this->getModel()->saveData($currentTime, $riga_20ft_40ft_list, $klaipeda_20ft_40ft_list)){
+            $this->setRedirect(JRoute::_('index.php?option=com_maritina&view=archives', false));
+        }else{
+            echo 'Somthing wrong with DataBase!!!(table doesn\'t exist etc.)';
+            echo var_dump($riga_20ft_40ft_list);
+            echo var_dump($klaipeda_20ft_40ft_list);
+        }
     }
 
 //вынимаем данные из таблицы

@@ -2,9 +2,6 @@
 /** @var $this JDocumentHTML */
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $this->_generator = '';
-//JHtml::_( 'jquery.framework', false, null, false );
-//$this->addStyleSheet( $this->baseurl . '/templates/' . $this->template . '/css/template_css.css?v1=1' );
-//$this->addScript( JUri::base() . 'templates/' . $this->template . '/scripts/scripts.js?v1=1' );
 
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
@@ -58,7 +55,6 @@ $isHomePage = $baseUrl === JUri::current();
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
 <body>
-<div class="page">
 
     <div class="page">
         <div class="main">
@@ -141,19 +137,26 @@ $isHomePage = $baseUrl === JUri::current();
                 </div>
             </div>
 
-
+        </div>
     </div>
-</div>
 
-    <div>
-        <jdoc:include type="message" />
-        <jdoc:include type="component" />
-    </div>>
+    <div class="page">
+        <div class="main">
 
-<!--		<jdoc:include type="modules" name="header" />-->
+            <div class="mw">
 
-<!--<div class="footer relative">-->
-<!--	<jdoc:include type="modules" name="footer" />-->
-<!--</div>-->
+                <div class="form_name">
+                    <h2 class="h2">QUOTE CALCULATOR</h2>
+                </div>
+
+               <div class="main_cont">
+
+                   <jdoc:include type="message" />
+                   <jdoc:include type="component" />
+               </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

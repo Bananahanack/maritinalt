@@ -72,7 +72,7 @@ class MaritinaViewArchives extends JViewLegacy
             JToolBarHelper::divider();
         }
 
-        JToolbarHelper::custom('archives.update', '', '', 'RefreshData', false );
+        JToolbarHelper::custom('archives.update', 'trash.png', 'icon-32-delete.png', 'RefreshData', false );
         JToolBarHelper::divider();
 	}
 

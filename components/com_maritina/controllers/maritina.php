@@ -42,6 +42,52 @@ class MaritinaControllerMaritina extends JControllerLegacy{
     }
 
     /**
+     * Данные
+     * @since version
+     */
+    public function getRiga(){
+        $jinput = JFactory::getApplication()->input;
+        $action = $jinput->get('action');
+        $lPort = $jinput->get('l_port');
+
+        $itemsRiga = self::getPortsList('riga_data_list');
+
+        $items = array(
+            'RIGA' => $itemsRiga,
+        );
+
+        if($action == 'getDestinationPort'){
+            if(isset($lPort) && $lPort != ''){
+                echo json_encode($items[$lPort]);
+            }else{
+                echo json_encode(array('Select loading port'));
+            }
+            exit;
+        }
+    }
+
+    public function getKlaipeda(){
+        $jinput = JFactory::getApplication()->input;
+        $action = $jinput->get('action');
+        $lPort = $jinput->get('l_port');
+
+        $itemsKlaipeda = self::getPortsList('klaipeda_data_list');
+
+        $items = array(
+            'KLAIPEDA' => $itemsKlaipeda
+        );
+
+        if($action == 'getDestinationPort'){
+            if(isset($lPort) && $lPort != ''){
+                echo json_encode($items[$lPort]);
+            }else{
+                echo json_encode(array('Select loading port'));
+            }
+            exit;
+        }
+    }
+
+    /**
      * Данные в дропдаунах
      * @since version
      */

@@ -2,11 +2,8 @@
 /** @var $this MaritinaViewMaritina */
 defined( '_JEXEC' ) or die; // No direct access
 ?>
-<div>
-	<h2 align="center" style = "color: white" >QUOTE CALCULATOR</h2>
 
-<!--	<form action="--><?php //echo JRoute::_( 'index.php?view=Maritina' ) ?><!--" method="post" class="form-validate">-->
-
+<div class="contact">
     <form action="" method="post" id="formRates" class="ui-form">
 
         <div class="form-row">
@@ -54,8 +51,6 @@ defined( '_JEXEC' ) or die; // No direct access
 <!--                <label for="email">Email:</label>-->
                 <input type="email" name="form[email]" id="email" value="" placeholder="Email" required="required">
             </div>
-<!--            "example@gmail.com"-->
-
         </div>
 
         <div class="form-row">
@@ -63,36 +58,67 @@ defined( '_JEXEC' ) or die; // No direct access
             <textarea placeholder="Message..." rows="4"  name="form[message]" id="message"></textarea>
         </div>
 
-
         <input type="hidden" name="option" value="com_maritina">
         <input type="hidden" name="task" value="maritina.send">
-            <input type="submit" id="btn" value="GET QUOTE   >">
+        <input type="submit" id="btn" value="GET QUOTE   >">
         <?php echo JHtml::_( 'form.token' ); ?>
 
-        <div id="get_rates_form_result"></div>
 
 	</form>
-
 </div>
 
+    <div  class="contact" id="get_rates_form_result">
+    </div>
+
+
 <script>
+
+    window.onload = function (){
+        $.getJSON('index.php?option=com_maritina&task=maritina.getRiga',
+            {action: 'getDestinationPort', l_port: 'RIGA'},
+            function (response){
+                localStorage.removeItem('RIGA');
+                localStorage.setItem('RIGA', JSON.stringify(response));
+            });
+    }
+
+    window.onload = function (){
+        $.getJSON('index.php?option=com_maritina&task=maritina.getKlaipeda',
+            {action: 'getDestinationPort', l_port: 'KLAIPEDA'},
+            function (response){
+                localStorage.removeItem('KLAIPEDA');
+                localStorage.setItem('KLAIPEDA', JSON.stringify(response));
+            });
+    }
+
     function loadDPort(select) {
         var dPortSelect = $('select[name="form[d_port]"]');
+        dPortSelect.html(
+            '<option value="">' + 'Select loading port' + '</option>'
+         ); // очищаем список
         dPortSelect.attr('disabled', 'disabled'); // делаем список не активным
+        const riga ='RIGA';
+        const klaipeda = 'KLAIPEDA';
 
-        $.getJSON('index.php?option=com_maritina&task=maritina.getDportData',
-            {action: 'getDestinationPort', l_port: select.value},
-            function(lPortList){
-                dPortSelect.html(''); // очищаем список
-
-                // заполняем список пришедшими данными
-                $.each(lPortList, function(i){
-                    dPortSelect.append(
-                        '<option value="' + this + '">' + this + '</option>'
-                    );
-                });
-                dPortSelect.removeAttr('disabled'); // делаем список активным
+        if(select.value === riga){
+            dPortSelect.html(''); // очищаем список
+            const dPortList =  JSON.parse(localStorage.getItem(riga));
+            $.each(dPortList, function (i) {
+                dPortSelect.append(
+                    '<option value="' + dPortList[i] + '">' + this + '</option>'
+                );
             });
+            dPortSelect.removeAttr('disabled'); // делаем список активным
+        }else if(select.value === klaipeda){
+            dPortSelect.html(''); // очищаем список
+            const dPortList =  JSON.parse(localStorage.getItem(klaipeda));
+            $.each(dPortList, function (i) {
+                dPortSelect.append(
+                    '<option value="' + dPortList[i] + '">' + this + '</option>'
+                );
+            });
+            dPortSelect.removeAttr('disabled'); // делаем список активным
+        }
     }
 
     jQuery(document).ready(function ($) {
@@ -106,11 +132,12 @@ defined( '_JEXEC' ) or die; // No direct access
                 url: form.attr('action'),
                 data: form.serializeArray(),
                 success: function (response) {
-                    // if (response.result) {
-                        //выполняем какие до дейстивя если нужно при успешной отправке формы
-                    // }
                     $('#get_rates_form_result').html(
-                        '<p style="">' + response + '</p>'
+                        '<h3 class="h3">'
+                            + response +
+                        '</h3>'
+
+                        // '<p style="">' + response + '</p>'
                         // '<table>' +
                         // '<tr> ' +
                         // '<th style="background: #8b98b0">' + response + '</th>' +

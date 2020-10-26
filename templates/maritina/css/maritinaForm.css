@@ -4,23 +4,51 @@
     --primaryFont: Algerian;
     --primaryFontSize: 17px;
 }
-.ui-form {
-    max-width: 25%;
-    /*min-height: inherit;*/
-    /*display: flex;*/
-    /*justify-content: left;*/
-    /*align-items: baseline;*/
-    /*flex-direction: column;*/
+/*.ui-form {*/
+/*    width: 100%;*/
+/*    !*min-height: inherit;*!*/
+/*    !*display: flex;*!*/
+/*    !*justify-content: left;*!*/
+/*    !*align-items: baseline;*!*/
+/*    !*flex-direction: column;*!*/
 
-    /*position: relative;*/
+/*    !*position: relative;*!*/
 
-    /*max-width: 450px;*/
-    padding: 25px 25px 70px;
-    margin: 25px auto 30px;
-    /*border-radius: 20px;*/
-    background: rgba(255, 255, 255, 0.1);
-    font-family: var(--primaryFont);
+/*    !*max-width: 450px;*!*/
+/*    margin: 25px auto 30px;*/
+/*    padding: 25px 25px 70px;*/
+
+/*    border-radius: 20px;*/
+/*    background: rgba(255, 255, 255, 0.1);*/
+/*    font-family: var(--primaryFont);*/
+/*}*/
+.page .main .mw .form_name{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    width:100%;
 }
+
+.page .main .mw .form_name h2{
+    color: white;
+    text-align:center;
+    font-weight:400;
+    font-size: 30px;
+    padding-top: 1px !important;
+}
+
+
+.page .main .mw .main_cont .contact .ui-form{
+    /*margin: 1px 3px !important;*/
+        margin: 3px auto;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.1);
+
+
+}
+
 .form-row {
     position: relative;
     margin-bottom: 15px;
@@ -32,11 +60,13 @@
     width: 100%;
     margin-bottom: 5px;
     margin-left: 5px;
+    font-weight:400;
 }
 
 .ui-form input[type="submit"] {
-    width: 50%;
+    width: 200px;
     font-size: 20px;
+    font-weight:400;
     color: white;
     background: var(--primaryBackground);
     padding: .8em 1em calc(.8em + 3px);
@@ -76,6 +106,7 @@
     width: 250px;
     font-size: var(--primaryFontSize);
     font-family: var(--primaryFont);
+    font-weight:400;
     color: white;
 }
 
@@ -93,6 +124,7 @@
     border-radius: var(--borderRadius);
     font-family: Algerian;
     font-size: var(--primaryFontSize);
+    font-weight:400;
     background: var(--primaryBackground);
     color: white;
     resize: none;
@@ -114,7 +146,8 @@
 .custom-dropdown select {
     background-color: var(--primaryBackground);
     color: white;
-    font-size: inherit;
+    font-size: var(--primaryFontSize);
+    font-weight:400;
     padding: .5em;
     padding-right: 2.5em;
     border: 0;
@@ -214,6 +247,7 @@ label#l1,label#l2 {
 
     cursor: pointer;
     position: relative;
+    font-weight:400;
 }
 
 /* input */
@@ -310,76 +344,3 @@ input:active+.design::after {
     background: hsla(0, 0%, 98%, .6);
     font-size: 16px;
 }
-
-
-
-
-
-/*!* The container *!*/
-
-/*.rb {*/
-/*    display: block;*/
-/*    position: relative;*/
-/*    padding-left: 35px;*/
-/*    margin-bottom: 12px;*/
-/*    cursor: pointer;*/
-/*    font-size: 22px;*/
-/*    -webkit-user-select: none;*/
-/*    -moz-user-select: none;*/
-/*    -ms-user-select: none;*/
-/*    user-select: none;*/
-/*}*/
-
-/*.rb label{*/
-/*    color: white;*/
-/*}*/
-
-/*!* Hide the browser's default radio button *!*/
-/*.rb input {*/
-/*    position: absolute;*/
-/*    opacity: 0;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*!* Create a custom radio button *!*/
-/*.checkm {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    height: 25px;*/
-/*    width: 25px;*/
-/*    background-color: #fff;*/
-/*    border-radius: 50%;*/
-/*}*/
-
-/*!* On mouse-over, add a grey background color *!*/
-/*.rb:hover input ~ .checkm {*/
-/*    background-color: #ccc;*/
-/*}*/
-
-/*!* When the radio button is checked, add a blue background *!*/
-/*.rb input:checked ~ .checkm {*/
-/*    background-color: #2196F3;*/
-/*}*/
-
-/*!* Create the indicator (the dot/circle - hidden when not checked) *!*/
-/*.checkm:after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    display: none;*/
-/*}*/
-
-/*!* Show the indicator (dot/circle) when checked *!*/
-/*.rb input:checked ~ .checkm:after {*/
-/*    display: block;*/
-/*}*/
-
-/*!* Style the indicator (dot/circle) *!*/
-/*.rb .checkm:after {*/
-/*    top: 9px;*/
-/*    left: 9px;*/
-/*    width: 8px;*/
-/*    height: 8px;*/
-/*    border-radius: 50%;*/
-/*    background: white;*/
-/*}*/
