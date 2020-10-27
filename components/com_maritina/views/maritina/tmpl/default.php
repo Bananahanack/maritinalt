@@ -139,10 +139,10 @@ defined( '_JEXEC' ) or die; // No direct access
                         if(response.result){
                             $('#get_rates_form_result').html(
                                 '<h3 class="h3">'
-                                + 'Your quote: ' +
-                                + response.message +
+                                + 'Your quote: '+ response.message +
                                 '</h3>'
                             );
+                            console.log(response.message);
                         }else if(response.message === 'Invalid E-mail!'){
                             emailAttr.css('border', '1px solid red');
                             error.css('color', 'rgba(255,255,255,1)');
