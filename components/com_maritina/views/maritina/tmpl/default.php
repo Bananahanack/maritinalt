@@ -26,10 +26,9 @@ defined( '_JEXEC' ) or die; // No direct access
             </span>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" id="rad" >
             <label>Container Size:</label>
             <section class="dark">
-<!--                <p>Container Size:</p>-->
                 <label id="l1">
                     <input type="radio" name="form[ft]" id="ft1" value="20ft" checked>
                     <span class="design"></span>
@@ -41,35 +40,27 @@ defined( '_JEXEC' ) or die; // No direct access
                     <span class="text">40ft</span>
                 </label>
             </section>
-            <section class="dark">
-
-            </section>
         </div>
 
         <div class="form-row">
-            <div class="form-input-material">
-<!--                <label for="email">Email:</label>-->
-                <input type="email" name="form[email]" id="email" value="" placeholder="Email" required="required">
-            </div>
+<!--                <span class="error" id="error" aria-live="polite"> </span>-->
+                <label class="error" id="error">Invalid E-mail!</label>
+                <input type="email" name="form[email]" id="email" value="" placeholder="Email" autocomplete="off" required="required">
         </div>
 
         <div class="form-row">
-<!--            <label for="message">Comment</label>-->
             <textarea placeholder="Message..." rows="4"  name="form[message]" id="message"></textarea>
         </div>
 
-        <input type="hidden" name="option" value="com_maritina">
-        <input type="hidden" name="task" value="maritina.send">
-        <input type="submit" id="btn" value="GET QUOTE   >">
-        <?php echo JHtml::_( 'form.token' ); ?>
-
+            <input type="hidden" name="option" value="com_maritina">
+            <input type="hidden" name="task" value="maritina.send">
+            <input type="submit" id="btn" value="GET QUOTE">
+            <?php echo JHtml::_( 'form.token' ); ?>
 
 	</form>
 </div>
 
-    <div  class="contact" id="get_rates_form_result">
-    </div>
-
+    <div  class="contact" id="get_rates_form_result"/>
 
 <script>
 
@@ -96,7 +87,7 @@ defined( '_JEXEC' ) or die; // No direct access
         dPortSelect.html(
             '<option value="">' + 'Select loading port' + '</option>'
          ); // очищаем список
-        dPortSelect.attr('disabled', 'disabled'); // делаем список не активным
+        dPortSelect.attr('disabled', 'disabled'); // делаем список неактивным
         const riga ='RIGA';
         const klaipeda = 'KLAIPEDA';
 
@@ -124,28 +115,55 @@ defined( '_JEXEC' ) or die; // No direct access
     jQuery(document).ready(function ($) {
         $('#formRates').submit(function (e) {
             e.preventDefault();
-            var form = $(this);
-            $.ajax({
-                type: 'POST',
-                cache: false,
-                dataType: 'json',
-                url: form.attr('action'),
-                data: form.serializeArray(),
-                success: function (response) {
-                    $('#get_rates_form_result').html(
-                        '<h3 class="h3">'
-                            + response +
-                        '</h3>'
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            let error = $('#error');
+            let emailAttr = $('#email');
+            let email = emailAttr.val();
+            if(validateEmail(email)){
+                // error.text('');
+                //костыль
+                emailAttr.css('border', 'none');
+                error.css('color', 'rgba(255,255,255,0)');
+                error.css('background-color', 'rgba(255,255,255,0)');
+                var form = $(this);
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    dataType: 'json',
+                    url: form.attr('action'),
+                    data: form.serializeArray(),
+                    success: function (response) {
+                        if(response.result){
+                            $('#get_rates_form_result').html(
+                                '<h3 class="h3">'
+                                + 'Your quote: ' +
+                                + response.message +
+                                '</h3>'
+                            );
+                        }else if(response.message === 'Invalid E-mail!'){
+                            emailAttr.css('border', '1px solid red');
+                            error.css('color', 'rgba(255,255,255,1)');
+                            error.css('background-color', '#900');
+                        }else{
+                            $('#get_rates_form_result').html(
+                                '<h3 class="h3">'
+                                + response.message +
+                                '</h3>'
+                            );
+                        }
+                    }
+                });
 
-                        // '<p style="">' + response + '</p>'
-                        // '<table>' +
-                        // '<tr> ' +
-                        // '<th style="background: #8b98b0">' + response + '</th>' +
-                        // ' </tr>' +
-                        // '</table>'
-                    );
-                }
-            });
+            }else{
+                emailAttr.css('border', '1px solid red');
+                // error.text('Invalid E-mail!');
+                //костыль
+                error.css('color', 'rgba(255,255,255,1)');
+                error.css('background-color', '#900');
+            }
         });
     });
 

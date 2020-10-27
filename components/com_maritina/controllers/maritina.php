@@ -42,7 +42,7 @@ class MaritinaControllerMaritina extends JControllerLegacy{
     }
 
     /**
-     * Данные
+     * Данные(getRiga, getKlaipeda) в дропдауне d_port
      * @since version
      */
     public function getRiga(){
@@ -88,33 +88,6 @@ class MaritinaControllerMaritina extends JControllerLegacy{
     }
 
     /**
-     * Данные в дропдаунах
-     * @since version
-     */
-    public function getDportData(){
-        $jinput = JFactory::getApplication()->input;
-        $action = $jinput->get('action');
-        $lPort = $jinput->get('l_port');
-
-        $itemsRiga = self::getPortsList('riga_data_list');
-        $itemsKlaipeda = self::getPortsList('klaipeda_data_list');
-
-        $items = array(
-            'RIGA' => $itemsRiga,
-            'KLAIPEDA' => $itemsKlaipeda
-        );
-
-        if($action == 'getDestinationPort'){
-            if(isset($lPort) && $lPort != ''){
-                echo json_encode($items[$lPort]);
-            }else{
-                echo json_encode(array('Select loading port'));
-            }
-            exit;
-        }
-    }
-
-    /**
      * Обработка запроса Get Rates
      * @since version
      */
@@ -122,7 +95,10 @@ class MaritinaControllerMaritina extends JControllerLegacy{
         if ( !JSession::checkToken() ) exit; //Проверка токена
 
         $form = $this->input->get( 'form', [ ], 'array' ); //получаем данные формы
-        if ( !filter_var( $form['email'], FILTER_VALIDATE_EMAIL ) ) $this->printJson( 'Invalid E-mail!' );//проверка E-mail
+        if ( !filter_var( $form['email'], FILTER_VALIDATE_EMAIL ) ) {
+            $this->printJson( 'Invalid E-mail!' );//проверка E-mail
+            exit;
+        }
 
         $l_port = mb_strtoupper(trim($form['l_port']));
         $d_port = mb_strtoupper(trim($form['d_port']));
@@ -143,13 +119,13 @@ class MaritinaControllerMaritina extends JControllerLegacy{
 
         //-------------------------------------------------------------------------
         if ( $this->getModel()->saveRequest( $form, $result ) ) { //дергаем в модели метод saveRequest, и если вернулось true то выполняем какие то действия и выводим сообщение
-            echo json_encode($result);
+//            echo json_encode($result);
+            $this->printJson($result, true);
             exit;
-//            $this->printJson( 'Request completed!', true );
+        }else{
+            $this->printJson( 'Request Error! Can\'t save request to database!' );//если не удалось сохранить
+            exit;
         }
-
-        $this->printJson( 'Request Error!' );//если не удалось сохранить
-        exit;
     }
     //-------------------------------------------------------------------------
     /*
