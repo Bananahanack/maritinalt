@@ -23,6 +23,3 @@ cookies.dat
 # File-based project format
 *.iws
 *.ipr
-/components/com_maritina_rates/gsheet/
-/administrator/components/com_maritina_rates/
-/components/com_maritina_rates/
