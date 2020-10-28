@@ -24,3 +24,5 @@ cookies.dat
 *.iws
 *.ipr
 /components/com_maritina_rates/gsheet/
+/administrator/components/com_maritina_rates/
+/components/com_maritina_rates/
