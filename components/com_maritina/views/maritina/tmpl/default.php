@@ -3,7 +3,7 @@
 defined( '_JEXEC' ) or die; // No direct access
 ?>
 
-<div class="contact">
+<div class="contact" id = "cont_form">
     <form action="" method="post" id="formRates" class="ui-form">
 
         <div class="form-row">
@@ -45,7 +45,7 @@ defined( '_JEXEC' ) or die; // No direct access
         <div class="form-row">
 <!--                <span class="error" id="error" aria-live="polite"> </span>-->
                 <label class="error" id="error">Invalid E-mail!</label>
-                <input type="email" name="form[email]" id="email" value="" placeholder="Email" autocomplete="off" required="required">
+                <input type="email" name="form[email]" id="email" value="" autocomplete="off" placeholder="Email" required="required">
         </div>
 
         <div class="form-row">
@@ -71,9 +71,6 @@ defined( '_JEXEC' ) or die; // No direct access
                 localStorage.removeItem('RIGA');
                 localStorage.setItem('RIGA', JSON.stringify(response));
             });
-    }
-
-    window.onload = function (){
         $.getJSON('index.php?option=com_maritina&task=maritina.getKlaipeda',
             {action: 'getDestinationPort', l_port: 'KLAIPEDA'},
             function (response){

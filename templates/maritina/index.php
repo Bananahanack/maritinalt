@@ -58,7 +58,7 @@ $isHomePage = $baseUrl === JUri::current();
 
     <div class="page">
         <div class="main">
-            <div class="mw">
+            <div class="mw" id="mw1">
 
                 <div class="header">
                     <div class="left_side">
@@ -81,7 +81,23 @@ $isHomePage = $baseUrl === JUri::current();
                     </div>
                 </div>
 
-                <div class="main_cont">
+                <div class="main_cont" id="main_cont_form">
+                        <jdoc:include type="message" />
+                        <jdoc:include type="component" />
+                </div>
+
+            </div>
+        </div>
+
+        <h2 id="h2" style="">
+            Contacts
+        </h2>
+
+
+        <div class="main">
+            <div class="mw" id="mw2">
+
+                <div class="main_cont" id="main_cont_cont">
                     <div class="contact">
                         <div class="flag_country">
                             <img src="<?php echo $template_url;?>/images/lit_flag-04.png" alt="latvia">
@@ -109,12 +125,11 @@ $isHomePage = $baseUrl === JUri::current();
                         <h3 class="h3"> RIGA, LATVIA </h3>
                         <ul>
                             <li>MARITINA LATVIJA SIA</li>
-                            <li>Ed. Smiļģa iela 2a, Rīga, LV-1048</li>
+                            <li>Ed. Smilga iela 2a, Riga, LV-1048</li>
                             <li>ph.:    +371-67617465</li>
                             <li>e-mail: riga@maritina.lt</li>
                             <li></li>
                             <li></li>
-
                         </ul>
                     </div>
 
@@ -133,29 +148,11 @@ $isHomePage = $baseUrl === JUri::current();
                             <li>E-mail: by@maritina.lt</li>
                         </ul>
                     </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="page">
-        <div class="main">
-
-            <div class="mw">
-
-                <div class="form_name">
-                    <h2 class="h2">QUOTE CALCULATOR</h2>
                 </div>
 
-               <div class="main_cont">
-
-                   <jdoc:include type="message" />
-                   <jdoc:include type="component" />
-               </div>
             </div>
         </div>
+
     </div>
 
 </body>
