@@ -48,9 +48,10 @@ $isHomePage = $baseUrl === JUri::current();
     <meta name="twitter:title" content="Maritina">
     <meta name="twitter:image" content="images/favicon.png">
 
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="icon" href="images/favicon.png" sizes="32x32">
-    <link rel="icon" href="images/favicon.png" sizes="150x150">
+<!--    <link rel="icon" type="image/png" href="images/favicon.png">-->
+<!--    <link rel="icon" href="images/favicon.png" sizes="32x32">-->
+<!--    <link rel="icon" href="images/favicon.png" sizes="150x150">-->
+    <link href="/templates/maritina/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
