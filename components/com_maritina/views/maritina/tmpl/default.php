@@ -45,8 +45,10 @@ defined( '_JEXEC' ) or die; // No direct access
         <div class="form-row">
 <!--                <span class="error" id="error" aria-live="polite"> </span>-->
                 <label class="error" id="error">Invalid E-mail!</label>
-                <input type="email" name="form[email]" id="email" value="" autocomplete="off" placeholder="Email" required="required">
+                <input type="email" name="form[email]" id="email" value=""  placeholder="Email" required="required">
         </div>
+
+<!--        autocomplete="off"-->
 
         <div class="form-row">
             <textarea placeholder="Message..." rows="4"  name="form[message]" id="message"></textarea>

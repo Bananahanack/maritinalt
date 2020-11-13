@@ -3,7 +3,6 @@
 defined( '_JEXEC' ) or die;
 require_once(JPATH_LIBRARIES.DIRECTORY_SEPARATOR.'gsheetlib'.DIRECTORY_SEPARATOR.'google-api-client'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 
-
 /**
  * Controller
  * @author Bananahanack
@@ -197,8 +196,9 @@ class MaritinaControllerMaritina extends JControllerLegacy{
                 }
                 $valuesList[$i] = array(
                     'port' => trim(mb_strtoupper($row[0])),
-                    '20ft' => trim($row[count($row) - 2]),
-                    '40ft' => trim($row[count($row) - 1])
+                    '20ft' => trim($row[count($row) - 4]) . ' ' . trim($row[count($row) - 3]) . ' ' . trim($row[count($row) - 1]),
+                    '40ft' => trim($row[count($row) - 4]) . ' ' . trim($row[count($row) - 2]) . ' ' . trim($row[count($row) - 1])
+//                    'terms' => trim($row[count($row) - 1])
                 );
                 $i++;
             }

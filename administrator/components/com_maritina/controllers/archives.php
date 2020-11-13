@@ -109,15 +109,16 @@ class MaritinaControllerArchives extends JControllerAdmin
                 if( $cellNumber > count($row) || ($row[0] === '') ){
                     continue;
                 }
-                $values_list[$i] = array(
-                    'port' => mb_strtoupper($row[0]),
-                    '20ft' => trim($row[count($row) - 2]),
-                    '40ft' => trim($row[count($row) - 1])
+                $valuesList[$i] = array(
+                    'port' => trim(mb_strtoupper($row[0])),
+                    '20ft' => trim($row[count($row) - 4]) . ' ' . trim($row[count($row) - 3]) . ' ' . trim($row[count($row) - 1]),
+                    '40ft' => trim($row[count($row) - 4]) . ' ' . trim($row[count($row) - 2]) . ' ' . trim($row[count($row) - 1])
+//                    'terms' => trim($row[count($row) - 1])
                 );
                 $i++;
             }
         }
-        return $values_list;
+        return $valuesList;
     }
 
 //подключение к шит апи
