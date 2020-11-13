@@ -139,7 +139,7 @@ defined( '_JEXEC' ) or die; // No direct access
                                 + 'Your quote: '+ response.message +
                                 '</h3>'
                             );
-                            console.log(response.message);
+                            // document.getElementById('message').value = '';
                         }else if(response.message === 'Invalid E-mail!'){
                             emailAttr.css('border', '1px solid red');
                             error.css('color', 'rgba(255,255,255,1)');
